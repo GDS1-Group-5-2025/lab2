@@ -3,20 +3,38 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public enum Direction { Left, Right }
-    public Direction startingDirection = Direction.Right; //default direction is right unless changed in the inspector
+    public Direction startingDirection = Direction.Right; //default starting direction
 
-    private float speed = 1f;
-    private Vector2 MovementDirection;
+    public float speed = 1f;
+    private Vector3 movementDirection;
+    private Rigidbody rb;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        MovementDirection = (startingDirection == Direction.Left) ? Vector2.left : Vector2.right;
+        rb = GetComponent<Rigidbody>();
+
+        //ensure Rigidbody is dynamic for collision detection
+        rb.isKinematic = false;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+
+        //set initial movement direction
+        movementDirection = (startingDirection == Direction.Left) ? Vector3.left : Vector3.right;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        transform.Translate(MovementDirection * speed * Time.deltaTime);
+        //move using Rigidbody to respect collisions
+        rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("Wall hit!");
+
+            //reverse movement direction on collision
+            movementDirection = (movementDirection == Vector3.left) ? Vector3.right : Vector3.left;
+        }
     }
 }
