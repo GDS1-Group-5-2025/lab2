@@ -21,13 +21,18 @@ public class Enemy : MonoBehaviour
         movementDirection = (startingDirection == Direction.Left) ? Vector3.left : Vector3.right;
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
-        //move using Rigidbody to respect collisions
+        Move();
+        
+    }
+
+    protected void Move()
+    {
         rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
     }
 
-    void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
@@ -36,5 +41,20 @@ public class Enemy : MonoBehaviour
             //reverse movement direction on collision
             movementDirection = (movementDirection == Vector3.left) ? Vector3.right : Vector3.left;
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (collision.contacts[0].normal.y < -0.5f) //player above enemy
+            {
+                HandlePlayerStomp(collision); //handle stomp differently for each enemy
+                collision.gameObject.GetComponent<Player>().Bounce(); //make player bounce up
+            }
+        }
+        if (collision.gameObject.CompareTag("Fire"))
+        {
+            //enemy dies on fire collision
+            Destroy(gameObject);
+        }
     }
+
+    protected abstract void HandlePlayerStomp(Collision collision);
 }
