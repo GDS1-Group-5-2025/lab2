@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     public enum Direction { Left, Right }
     public Direction startingDirection = Direction.Right; //default starting direction
@@ -24,7 +24,6 @@ public class Enemy : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         Move();
-        
     }
 
     protected void Move()
@@ -46,7 +45,8 @@ public class Enemy : MonoBehaviour
             if (collision.contacts[0].normal.y < -0.5f) //player above enemy
             {
                 HandlePlayerStomp(collision); //handle stomp differently for each enemy
-                collision.gameObject.GetComponent<Player>().Bounce(); //make player bounce up
+                
+                // >>>>> make player bounce up <<<<<
             }
         }
         if (collision.gameObject.CompareTag("Fire"))
