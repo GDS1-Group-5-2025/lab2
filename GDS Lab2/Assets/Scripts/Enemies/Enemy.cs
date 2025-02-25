@@ -6,10 +6,10 @@ public abstract class Enemy : MonoBehaviour
     public Direction startingDirection = Direction.Right; // Default starting direction
 
     public float speed = 1f;
-    private Vector2 movementDirection;
-    private Rigidbody2D rb;
+    protected Vector2 movementDirection;
+    protected Rigidbody2D rb;
 
-    void Start()
+    protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
