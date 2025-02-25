@@ -3,22 +3,22 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     public enum Direction { Left, Right }
-    public Direction startingDirection = Direction.Right; //default starting direction
+    public Direction startingDirection = Direction.Right; // Default starting direction
 
     public float speed = 1f;
-    private Vector3 movementDirection;
-    private Rigidbody rb;
+    private Vector2 movementDirection;
+    private Rigidbody2D rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
 
-        //ensure Rigidbody is dynamic for collision detection
+        // Ensure Rigidbody2D is dynamic for collision detection
         rb.isKinematic = false;
-        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
-        //set initial movement direction
-        movementDirection = (startingDirection == Direction.Left) ? Vector3.left : Vector3.right;
+        // Set initial movement direction
+        movementDirection = (startingDirection == Direction.Left) ? Vector2.left : Vector2.right;
     }
 
     protected virtual void FixedUpdate()
@@ -31,30 +31,37 @@ public abstract class Enemy : MonoBehaviour
         rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
     }
 
-    protected virtual void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            Debug.Log("Wall hit!");
-
-            //reverse movement direction on collision
-            movementDirection = (movementDirection == Vector3.left) ? Vector3.right : Vector3.left;
-        }
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (collision.contacts[0].normal.y < -0.5f) //player above enemy
-            {
-                HandlePlayerStomp(collision); //handle stomp differently for each enemy
-                
-                // >>>>> make player bounce up <<<<<
-            }
-        }
         if (collision.gameObject.CompareTag("Fire"))
         {
-            //enemy dies on fire collision
+            // Enemy dies on fire collision
             Destroy(gameObject);
+        }
+        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Floor"))
+        {
+            Debug.Log("Object hit!");
+
+            // Reverse movement direction on collision
+            movementDirection = (movementDirection == Vector2.left) ? Vector2.right : Vector2.left;
+        }
+        else
+        {
+            // Check if the player is landing on top
+            ContactPoint2D contact = collision.GetContact(0);
+            if (contact.normal.y < -0.5f) // Player is above the enemy
+            {
+                HandlePlayerStomp(collision);
+
+                // Make the player bounce up
+                Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
+                if (playerRb != null)
+                {
+                    playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 5f); // Adjust bounce height as needed
+                }
+            }
         }
     }
 
-    protected abstract void HandlePlayerStomp(Collision collision);
+    protected abstract void HandlePlayerStomp(Collision2D collision);
 }
