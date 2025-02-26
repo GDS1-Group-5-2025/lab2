@@ -8,13 +8,13 @@ public abstract class Enemy : MonoBehaviour
     public float speed = 1f;
     protected Vector2 movementDirection;
     protected Rigidbody2D rb;
+    protected Animator animator;
 
     protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
-        // Ensure Rigidbody2D is dynamic for collision detection
-        rb.isKinematic = false;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
         // Set initial movement direction
