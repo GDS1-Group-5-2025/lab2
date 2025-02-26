@@ -143,8 +143,8 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 036ad949bd689d14e8c2944204a1e48d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -205,7 +205,19 @@ MonoBehaviour:
     m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
     m_ActionName: 'Player/Crouch[/Keyboard/c,/Keyboard/s]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3047904864743014131}
+        m_TargetAssemblyTypeName: MarioMovement, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: f1ba0d36-48eb-4cd5-b651-1c94a6531f70
     m_ActionName: 'Player/Jump[/Keyboard/space]'
   - m_PersistentCalls:
@@ -294,5 +306,21 @@ MonoBehaviour:
   releaseDeceleration: 0.0031738281
   skidDeceleration: 0.0063476562
   skidTurnaroundSpeed: 0.03515625
+  momentumDecelerationSmall: 0.002319336
+  momentumDecelerationMedium: 0.0031738281
+  momentumDecelerationLarge: 0.003479004
+  jumpSpeedSmall: 0.25
+  jumpSpeedMedium: 0.25
+  jumpSpeedLarge: 0.3125
+  normalGravitySmall: 0.02734375
+  normalGravityMedium: 0.0234375
+  normalGravityLarge: 0.03515625
+  dampenedGravitySmall: 0.0078125
+  dampenedGravityMedium: 0.0073242188
+  dampenedGravityLarge: 0.009765625
   xAxisInput: 0
   isRunning: 0
+  isJumping: 0
+  initialXSpeedWhenJumping: 0
+  lastGravity: 0.009765625
+  lastDampenedGravity: 0.009765625
