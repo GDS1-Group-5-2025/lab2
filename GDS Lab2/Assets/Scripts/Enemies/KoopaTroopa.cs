@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class KoopaTroopa : Enemy
 {
@@ -13,7 +14,7 @@ public class KoopaTroopa : Enemy
 
     private float originalSpeed;
 
-    private void InitializeKoopa() 
+    private void InitializeKoopa()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -49,7 +50,7 @@ public class KoopaTroopa : Enemy
     {
         base.Move();
 
-        if (spriteRenderer != null) 
+        if (spriteRenderer != null)
         {
             spriteRenderer.flipX = movementDirection.x > 0;
         }
@@ -72,6 +73,29 @@ public class KoopaTroopa : Enemy
         rb.gravityScale = 1;
 
         Debug.Log("Koopa entered shell mode!");
+
+        StartCoroutine(ShellTimer());
+    }
+
+    private IEnumerator ShellTimer()
+    {
+        yield return new WaitForSeconds(13);
+        if (currentState == KoopaState.Shell)
+        {
+            ExitShellMode();
+        }
+    }
+
+    private void ExitShellMode()
+    {
+        currentState = KoopaState.Walking;
+
+        if (boxCollider != null) boxCollider.enabled = true;
+        if (circleCollider != null) circleCollider.enabled = false;
+
+        speed = originalSpeed;
+
+        Debug.Log("Koopa exited shell mode!");
     }
 
     private void KickShell(Collision2D collision)
