@@ -10,7 +10,7 @@ public abstract class Enemy : MonoBehaviour
     protected Rigidbody2D rb;
     protected Animator animator;
 
-    protected void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
         Move();
     }
 
-    protected void Move()
+    protected virtual void Move()
     {
         rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
     }

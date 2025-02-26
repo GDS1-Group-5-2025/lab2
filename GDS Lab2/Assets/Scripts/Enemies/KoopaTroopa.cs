@@ -8,23 +8,29 @@ public class KoopaTroopa : Enemy
     [SerializeField] private Sprite shellSprite;
 
     private SpriteRenderer spriteRenderer;
-    //private CircleCollider2D circleCollider;
-    private PolygonCollider2D polygonCollider;
+    private CircleCollider2D circleCollider;
+    private BoxCollider2D boxCollider;
 
     private float originalSpeed;
 
     private void InitializeKoopa() 
     {
-        base.Start();
-
         spriteRenderer = GetComponent<SpriteRenderer>();
-        polygonCollider = GetComponent<PolygonCollider2D>();
-        //circleCollider = GetComponent<CircleCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
 
         originalSpeed = speed;
 
-        /*if (circleCollider != null)
-            circleCollider.enabled = false;*/
+        if (circleCollider != null)
+        {
+            circleCollider.enabled = false;
+        }
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        InitializeKoopa();
     }
 
     protected override void HandlePlayerStomp(Collision2D collision)
@@ -39,6 +45,16 @@ public class KoopaTroopa : Enemy
         }
     }
 
+    protected override void Move()
+    {
+        base.Move();
+
+        if (spriteRenderer != null) 
+        {
+            spriteRenderer.flipX = movementDirection.x > 0;
+        }
+    }
+
     private void ShellMode()
     {
         currentState = KoopaState.Shell;
@@ -48,8 +64,8 @@ public class KoopaTroopa : Enemy
             spriteRenderer.sprite = shellSprite;
         }
 
-        if (polygonCollider != null) polygonCollider.enabled = false;
-        //if (circleCollider != null) circleCollider.enabled = true;
+        if (boxCollider != null) boxCollider.enabled = false;
+        if (circleCollider != null) circleCollider.enabled = true;
 
         speed = 0;
         rb.linearVelocity = Vector2.zero;

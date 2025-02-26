@@ -2877,14 +2877,77 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 390
+        y: 376
         width: 16
-        height: 16
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
-      outline: []
+      outline:
+      - - {x: 7, y: -11}
+        - {x: 7, y: -10}
+        - {x: 6, y: -10}
+        - {x: 6, y: -9}
+        - {x: 8, y: -9}
+        - {x: 8, y: -8}
+        - {x: 7, y: -8}
+        - {x: 7, y: 0}
+        - {x: 6, y: 0}
+        - {x: 6, y: 1}
+        - {x: 5, y: 1}
+        - {x: 5, y: 2}
+        - {x: 0, y: 2}
+        - {x: 0, y: 1}
+        - {x: -1, y: 1}
+        - {x: -1, y: -1}
+        - {x: -2, y: -1}
+        - {x: -2, y: 2}
+        - {x: -1, y: 2}
+        - {x: -1, y: 8}
+        - {x: -2, y: 8}
+        - {x: -2, y: 9}
+        - {x: -3, y: 9}
+        - {x: -3, y: 10}
+        - {x: -4, y: 10}
+        - {x: -4, y: 11}
+        - {x: -5, y: 11}
+        - {x: -5, y: 10}
+        - {x: -6, y: 10}
+        - {x: -6, y: 8}
+        - {x: -7, y: 8}
+        - {x: -7, y: 4}
+        - {x: -8, y: 4}
+        - {x: -8, y: -2}
+        - {x: -7, y: -2}
+        - {x: -7, y: -3}
+        - {x: -6, y: -3}
+        - {x: -6, y: 0}
+        - {x: -5, y: 0}
+        - {x: -5, y: 1}
+        - {x: -5, y: 1}
+        - {x: -4, y: 1}
+        - {x: -4, y: -1}
+        - {x: -5, y: -1}
+        - {x: -5, y: -4}
+        - {x: -6, y: -4}
+        - {x: -6, y: -5}
+        - {x: -5, y: -5}
+        - {x: -5, y: -7}
+        - {x: -4, y: -7}
+        - {x: -4, y: -9}
+        - {x: -5, y: -9}
+        - {x: -5, y: -10}
+        - {x: -6, y: -10}
+        - {x: -6, y: -11}
+        - {x: -7, y: -11}
+        - {x: -7, y: -12}
+        - {x: -2, y: -12}
+        - {x: -2, y: -11}
+        - {x: 4, y: -11}
+        - {x: 4, y: -12}
+        - {x: 8, y: -12}
+        - {x: 8, y: -11}
       physicsShape: []
       tessellationDetail: 0
       bones: []
@@ -2899,14 +2962,74 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 18
-        y: 390
+        y: 376
         width: 16
-        height: 16
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
-      outline: []
+      outline:
+      - - {x: 8, y: -7}
+        - {x: 7, y: -7}
+        - {x: 7, y: 0}
+        - {x: 6, y: 0}
+        - {x: 6, y: 2}
+        - {x: 5, y: 2}
+        - {x: 5, y: 3}
+        - {x: 0, y: 3}
+        - {x: 0, y: 2}
+        - {x: -1, y: 2}
+        - {x: -1, y: 9}
+        - {x: -2, y: 9}
+        - {x: -2, y: 11}
+        - {x: -3, y: 11}
+        - {x: -3, y: 12}
+        - {x: -4, y: 12}
+        - {x: -4, y: 11}
+        - {x: -5, y: 11}
+        - {x: -5, y: 10}
+        - {x: -6, y: 10}
+        - {x: -6, y: 8}
+        - {x: -7, y: 8}
+        - {x: -7, y: 5}
+        - {x: -8, y: 5}
+        - {x: -8, y: 1}
+        - {x: -6, y: 1}
+        - {x: -6, y: 2}
+        - {x: -5, y: 2}
+        - {x: -5, y: 3}
+        - {x: -3, y: 3}
+        - {x: -3, y: 1}
+        - {x: -4, y: 1}
+        - {x: -4, y: 0}
+        - {x: -5, y: 0}
+        - {x: -5, y: -1}
+        - {x: -7, y: -1}
+        - {x: -7, y: -2}
+        - {x: -6, y: -2}
+        - {x: -6, y: -3}
+        - {x: -5, y: -3}
+        - {x: -5, y: -6}
+        - {x: -4, y: -6}
+        - {x: -4, y: -10}
+        - {x: -3, y: -10}
+        - {x: -3, y: -11}
+        - {x: -2, y: -11}
+        - {x: -2, y: -12}
+        - {x: 1, y: -12}
+        - {x: 1, y: -11}
+        - {x: 0, y: -11}
+        - {x: 0, y: -10}
+        - {x: 4, y: -10}
+        - {x: 4, y: -11}
+        - {x: 3, y: -11}
+        - {x: 3, y: -12}
+        - {x: 6, y: -12}
+        - {x: 6, y: -11}
+        - {x: 7, y: -11}
+        - {x: 7, y: -8}
+        - {x: 8, y: -8}
       physicsShape: []
       tessellationDetail: 0
       bones: []
@@ -2964,8 +3087,8 @@ TextureImporter:
       name: Goomba Right_124
       rect:
         serializedVersion: 2
-        x: 72
-        y: 390
+        x: 71
+        y: 394
         width: 16
         height: 16
       alignment: 0
@@ -2987,7 +3110,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 90
-        y: 390
+        y: 393
         width: 16
         height: 16
       alignment: 0
@@ -3406,8 +3529,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 372
-        width: 16
-        height: 16
+        width: 1
+        height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3429,7 +3552,7 @@ TextureImporter:
         x: 18
         y: 372
         width: 16
-        height: 16
+        height: 1
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3493,14 +3616,54 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 72
-        y: 372
+        y: 376
         width: 16
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
-      outline: []
+      outline:
+      - - {x: 8, y: 0}
+        - {x: 7, y: 0}
+        - {x: 7, y: 2}
+        - {x: 6, y: 2}
+        - {x: 6, y: 4}
+        - {x: 5, y: 4}
+        - {x: 5, y: 6}
+        - {x: 4, y: 6}
+        - {x: 4, y: 7}
+        - {x: 3, y: 7}
+        - {x: 3, y: 8}
+        - {x: -3, y: 8}
+        - {x: -3, y: 7}
+        - {x: -4, y: 7}
+        - {x: -4, y: 6}
+        - {x: -5, y: 6}
+        - {x: -5, y: 4}
+        - {x: -6, y: 4}
+        - {x: -6, y: 2}
+        - {x: -7, y: 2}
+        - {x: -7, y: 0}
+        - {x: -8, y: 0}
+        - {x: -8, y: -2}
+        - {x: -5, y: -2}
+        - {x: -5, y: -3}
+        - {x: -4, y: -3}
+        - {x: -4, y: -4}
+        - {x: -3, y: -4}
+        - {x: -3, y: -5}
+        - {x: -2, y: -5}
+        - {x: -2, y: -6}
+        - {x: 2, y: -6}
+        - {x: 2, y: -5}
+        - {x: 3, y: -5}
+        - {x: 3, y: -4}
+        - {x: 4, y: -4}
+        - {x: 4, y: -3}
+        - {x: 5, y: -3}
+        - {x: 5, y: -2}
+        - {x: 8, y: -2}
       physicsShape: []
       tessellationDetail: 0
       bones: []
@@ -3515,7 +3678,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 90
-        y: 372
+        y: 376
         width: 16
         height: 16
       alignment: 0
