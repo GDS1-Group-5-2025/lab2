@@ -6,15 +6,15 @@ public abstract class Enemy : MonoBehaviour
     public Direction startingDirection = Direction.Right; // Default starting direction
 
     public float speed = 1f;
-    private Vector2 movementDirection;
-    private Rigidbody2D rb;
+    protected Vector2 movementDirection;
+    protected Rigidbody2D rb;
+    protected Animator animator;
 
-    void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
-        // Ensure Rigidbody2D is dynamic for collision detection
-        rb.isKinematic = false;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
         // Set initial movement direction
@@ -26,7 +26,7 @@ public abstract class Enemy : MonoBehaviour
         Move();
     }
 
-    protected void Move()
+    protected virtual void Move()
     {
         rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
     }

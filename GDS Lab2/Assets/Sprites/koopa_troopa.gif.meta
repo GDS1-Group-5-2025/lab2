@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6037060c10a7d46839944cc94da14970
+guid: 72ad62e2ed806c84ea0c0427dd8a0816
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2665958366948368982
-    second: goomba_0
+      213: -8221019094831778170
+    second: koopa_troopa_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -109,40 +109,89 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: goomba_0
+      name: koopa_troopa_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 80
-        height: 80
+        height: 108
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
-      outline: []
+      outline:
+      - - {x: -24, y: 34}
+        - {x: -28, y: 34}
+        - {x: -28, y: 18}
+        - {x: -32, y: 18}
+        - {x: -32, y: -6}
+        - {x: -28, y: -6}
+        - {x: -28, y: -10}
+        - {x: -24, y: -10}
+        - {x: -24, y: 2}
+        - {x: -20, y: 2}
+        - {x: -20, y: 6}
+        - {x: -16, y: 6}
+        - {x: -16, y: -2}
+        - {x: -20, y: -2}
+        - {x: -20, y: -14}
+        - {x: -24, y: -14}
+        - {x: -24, y: -18}
+        - {x: -20, y: -18}
+        - {x: -20, y: -26}
+        - {x: -16, y: -26}
+        - {x: -16, y: -34}
+        - {x: -20, y: -34}
+        - {x: -20, y: -38}
+        - {x: -24, y: -38.110237}
+        - {x: -24, y: -42}
+        - {x: -28, y: -42}
+        - {x: -28, y: -46}
+        - {x: -8, y: -46}
+        - {x: -8, y: -42}
+        - {x: 16, y: -42}
+        - {x: 16, y: -46}
+        - {x: 32, y: -46}
+        - {x: 32, y: -42}
+        - {x: 28, y: -42}
+        - {x: 28, y: -38}
+        - {x: 24, y: -38}
+        - {x: 24, y: -34}
+        - {x: 32, y: -34}
+        - {x: 32, y: -30}
+        - {x: 28, y: -30}
+        - {x: 28, y: 2}
+        - {x: 24, y: 2}
+        - {x: 24, y: 6}
+        - {x: 20, y: 6}
+        - {x: 20, y: 10}
+        - {x: 0, y: 10}
+        - {x: 0, y: 6}
+        - {x: -4, y: 6}
+        - {x: -4, y: -2}
+        - {x: -8, y: -2}
+        - {x: -8, y: 10}
+        - {x: -4, y: 10}
+        - {x: -4, y: 34}
+        - {x: -8, y: 34}
+        - {x: -8, y: 38}
+        - {x: -12, y: 38}
+        - {x: -12, y: 42}
+        - {x: -16, y: 42}
+        - {x: -16, y: 46}
+        - {x: -20, y: 46}
+        - {x: -20, y: 42}
+        - {x: -24, y: 42}
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: aaddf087dfc900bd0800000000000000
-      internalID: -2665958366948368982
+      spriteID: 68639d8a0b219ed80800000000000000
+      internalID: -8221019094831778170
       vertices: []
       indices: 
       edges: []
@@ -151,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 210b539cb548b554e84cafbd82a02575
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +210,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      goomba_0: -2665958366948368982
+      koopa_troopa_0: -8221019094831778170
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
