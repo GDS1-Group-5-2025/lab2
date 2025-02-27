@@ -20,7 +20,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5510ea5e8da09974f832a265ec61861b, type: 2}
+  m_Motion: {fileID: 7400000, guid: e5954eb5785638448b8f3c8508bd1a81, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -32,7 +32,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: InvisibleBlockAnimator
+  m_Name: BrickBlock_Item
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Hit
@@ -100,7 +100,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9efea08ffc3a1d542866bc4f9899e94a, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6315955a0d78e74439da6bb6016fd847, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
