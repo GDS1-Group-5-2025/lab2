@@ -5,7 +5,8 @@ public enum MarioStateEnum
     Small,
     Big,
     Fire,
-    Dead
+    Dead,
+    Invincible
 }
 
 public class MarioState : MonoBehaviour
@@ -36,5 +37,9 @@ public class MarioState : MonoBehaviour
             MarioStateEnum.Big => MarioStateEnum.Fire,
             _ => currentState
         };
+    }
+
+    public void InvincibleStar(){
+        currentState = MarioStateEnum.Invincible;
     }
 }
