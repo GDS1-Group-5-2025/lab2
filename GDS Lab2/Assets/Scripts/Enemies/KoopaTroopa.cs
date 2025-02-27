@@ -38,10 +38,12 @@ public class KoopaTroopa : Enemy
         {
             ShellMode();
         }
-        if (currentState == KoopaState.Shell)
+        /*if (currentState == KoopaState.Shell)
         {
             KickShell(collision);
-        }
+        }*/
+
+        // The above code section was just for testing if kicking works
     }
 
     protected override void Move()
@@ -111,13 +113,16 @@ public class KoopaTroopa : Enemy
         Debug.Log("Koopa exited shell mode!");
     }
 
+    //This function should be called by Mario when he is next to a shell and presses jump button to kick it
     public void KickShell(Collision2D collision)
     {
         currentState = KoopaState.ShellMoving;
         speed = originalSpeed * 4;
 
-        float playerDirection = Mathf.Sign(collision.transform.position.x - transform.position.x);
-        movementDirection = new Vector2(playerDirection, 0);
+        //float playerDirection = Mathf.Sign(collision.transform.position.x - transform.position.x);
+        //movementDirection = new Vector2(playerDirection, 0);
+
+        //Above code for testing
 
         if (rb != null)
         {
