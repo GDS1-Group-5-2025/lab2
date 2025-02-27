@@ -7,6 +7,10 @@ TagManager:
   - Wall
   - Fire
   - Floor
+  - Goomba
+  - Koopa
+  - Shell
+  - Shell Moving
   layers:
   - Default
   - TransparentFX
@@ -43,6 +47,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Enemies
+    uniqueID: 3151614343
+    locked: 0
+  - name: Player
+    uniqueID: 3472485351
     locked: 0
   m_RenderingLayers:
   - Default

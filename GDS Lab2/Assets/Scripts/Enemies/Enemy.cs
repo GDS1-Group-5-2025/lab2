@@ -7,8 +7,10 @@ public abstract class Enemy : MonoBehaviour
 
     public float speed = 1f;
     protected Vector2 movementDirection;
+
     protected Rigidbody2D rb;
     protected Animator animator;
+    protected SpriteRenderer spriteRenderer;
 
     private bool movementEnabled = true;
 
@@ -16,6 +18,7 @@ public abstract class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
@@ -49,9 +52,9 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Fire"))
+        if (collision.gameObject.CompareTag("Fire") || collision.gameObject.CompareTag("Shell Moving"))
         {
-            Destroy(gameObject);
+            HitSequence();
         }
         else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Floor"))
         {
@@ -68,6 +71,25 @@ public abstract class Enemy : MonoBehaviour
                 HandlePlayerStomp(collision);
             }
         }
+    }
+
+    protected virtual void HitSequence()
+    {
+        SetMovementEnabled(false);
+
+        rb.isKinematic = false;
+        rb.gravityScale = 1f;
+        animator.enabled = false;
+        spriteRenderer.flipY = true;
+
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        foreach (var col in colliders)
+        {
+            col.enabled = false;
+        }
+
+        rb.linearVelocity = new Vector2(0f, 3f); 
+        Destroy(gameObject, 2f);   
     }
 
     protected abstract void HandlePlayerStomp(Collision2D collision);

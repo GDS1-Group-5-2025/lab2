@@ -3087,8 +3087,8 @@ TextureImporter:
       name: Goomba Right_124
       rect:
         serializedVersion: 2
-        x: 71
-        y: 394
+        x: 90
+        y: 393
         width: 16
         height: 16
       alignment: 0
@@ -3616,54 +3616,54 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 72
-        y: 376
+        y: 378
         width: 16
-        height: 16
-      alignment: 0
+        height: 28
+      alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline:
-      - - {x: 8, y: 0}
-        - {x: 7, y: 0}
-        - {x: 7, y: 2}
-        - {x: 6, y: 2}
-        - {x: 6, y: 4}
-        - {x: 5, y: 4}
-        - {x: 5, y: 6}
-        - {x: 4, y: 6}
-        - {x: 4, y: 7}
-        - {x: 3, y: 7}
-        - {x: 3, y: 8}
-        - {x: -3, y: 8}
-        - {x: -3, y: 7}
-        - {x: -4, y: 7}
-        - {x: -4, y: 6}
-        - {x: -5, y: 6}
-        - {x: -5, y: 4}
-        - {x: -6, y: 4}
-        - {x: -6, y: 2}
-        - {x: -7, y: 2}
-        - {x: -7, y: 0}
-        - {x: -8, y: 0}
-        - {x: -8, y: -2}
-        - {x: -5, y: -2}
-        - {x: -5, y: -3}
-        - {x: -4, y: -3}
-        - {x: -4, y: -4}
-        - {x: -3, y: -4}
-        - {x: -3, y: -5}
-        - {x: -2, y: -5}
-        - {x: -2, y: -6}
-        - {x: 2, y: -6}
-        - {x: 2, y: -5}
-        - {x: 3, y: -5}
-        - {x: 3, y: -4}
-        - {x: 4, y: -4}
-        - {x: 4, y: -3}
-        - {x: 5, y: -3}
+      - - {x: 8, y: -8}
+        - {x: 7, y: -8}
+        - {x: 7, y: -6}
+        - {x: 6, y: -6}
+        - {x: 6, y: -4}
+        - {x: 5, y: -4}
         - {x: 5, y: -2}
-        - {x: 8, y: -2}
+        - {x: 4, y: -2}
+        - {x: 4, y: -1}
+        - {x: 3, y: -1}
+        - {x: 3, y: 0}
+        - {x: -3, y: 0}
+        - {x: -3, y: -1}
+        - {x: -4, y: -1}
+        - {x: -4, y: -2}
+        - {x: -5, y: -2}
+        - {x: -5, y: -4}
+        - {x: -6, y: -4}
+        - {x: -6, y: -6}
+        - {x: -7, y: -6}
+        - {x: -7, y: -8}
+        - {x: -8, y: -8}
+        - {x: -8, y: -10}
+        - {x: -5, y: -10}
+        - {x: -5, y: -11}
+        - {x: -4, y: -11}
+        - {x: -4, y: -12}
+        - {x: -3, y: -12}
+        - {x: -3, y: -13}
+        - {x: -2, y: -13}
+        - {x: -2, y: -14}
+        - {x: 2, y: -14}
+        - {x: 2, y: -13}
+        - {x: 3, y: -13}
+        - {x: 3, y: -12}
+        - {x: 4, y: -12}
+        - {x: 4, y: -11}
+        - {x: 5, y: -11}
+        - {x: 5, y: -10}
+        - {x: 8, y: -10}
       physicsShape: []
       tessellationDetail: 0
       bones: []
@@ -14651,6 +14651,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Enemy Sprites_0
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 377
+        width: 2
+        height: 2
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80f9f13645719b14f9ac385f43d4d9f5
+      internalID: -1803293757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -14665,6 +14687,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      Enemy Sprites_0: -1803293757
       Goomba Right_0: 892464593
       Goomba Right_1: -808118597
       Goomba Right_10: 82343955

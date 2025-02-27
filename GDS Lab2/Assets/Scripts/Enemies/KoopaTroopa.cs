@@ -8,7 +8,6 @@ public class KoopaTroopa : Enemy
 
     [SerializeField] private Sprite shellSprite;
 
-    private SpriteRenderer spriteRenderer;
     private CircleCollider2D circleCollider;
     private BoxCollider2D boxCollider;
 
@@ -16,7 +15,6 @@ public class KoopaTroopa : Enemy
 
     private void InitializeKoopa()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
         circleCollider = GetComponent<CircleCollider2D>();
 
@@ -40,7 +38,7 @@ public class KoopaTroopa : Enemy
         {
             ShellMode();
         }
-        else if (currentState == KoopaState.Shell)
+        if (currentState == KoopaState.Shell)
         {
             KickShell(collision);
         }
@@ -63,7 +61,6 @@ public class KoopaTroopa : Enemy
         if (shellSprite != null)
         {
             spriteRenderer.sprite = shellSprite;
-            //spriteRenderer.transform.localPosition = new Vector3(spriteRenderer.transform.localPosition.x, 0.5f, spriteRenderer.transform.localPosition.z);
         }
 
         if (animator != null)
@@ -79,6 +76,7 @@ public class KoopaTroopa : Enemy
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 1;
 
+        gameObject.tag = "Shell";
         Debug.Log("Koopa entered shell mode!");
 
         StartCoroutine(ShellTimer());
@@ -96,7 +94,6 @@ public class KoopaTroopa : Enemy
     private void ExitShellMode()
     {
         currentState = KoopaState.Walking;
-        spriteRenderer.transform.localPosition = new Vector3(spriteRenderer.transform.localPosition.x, 0f, spriteRenderer.transform.localPosition.z);
 
         if (animator != null)
         {
@@ -110,13 +107,14 @@ public class KoopaTroopa : Enemy
 
         SetMovementEnabled(true);
 
+        gameObject.tag = "Koopa";
         Debug.Log("Koopa exited shell mode!");
     }
 
-    private void KickShell(Collision2D collision)
+    public void KickShell(Collision2D collision)
     {
         currentState = KoopaState.ShellMoving;
-        speed = originalSpeed * 2;
+        speed = originalSpeed * 4;
 
         float playerDirection = Mathf.Sign(collision.transform.position.x - transform.position.x);
         movementDirection = new Vector2(playerDirection, 0);
@@ -125,7 +123,16 @@ public class KoopaTroopa : Enemy
         {
             rb.isKinematic = false;
         }
+        SetMovementEnabled(true);
+
+        gameObject.tag = "Shell Moving";
 
         Debug.Log("Koopa shell kicked!");
+    }
+
+    protected override void HitSequence()
+    {
+        base.HitSequence();
+        spriteRenderer.sprite = shellSprite;
     }
 }
