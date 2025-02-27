@@ -1,0 +1,143 @@
+using UnityEngine;
+using System.Collections;
+
+public class KoopaTroopa : Enemy
+{
+    private enum KoopaState { Walking, Shell, ShellMoving }
+    private KoopaState currentState = KoopaState.Walking;
+
+    [SerializeField] private Sprite shellSprite;
+
+    private CircleCollider2D circleCollider;
+    private BoxCollider2D boxCollider;
+
+    private float originalSpeed;
+
+    private void InitializeKoopa()
+    {
+        boxCollider = GetComponent<BoxCollider2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
+
+        originalSpeed = speed;
+
+        if (circleCollider != null)
+        {
+            circleCollider.enabled = false;
+        }
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        InitializeKoopa();
+    }
+
+    protected override void HandlePlayerStomp(Collision2D collision)
+    {
+        if (currentState == KoopaState.Walking)
+        {
+            ShellMode();
+        }
+        /*if (currentState == KoopaState.Shell)
+        {
+            KickShell(collision);
+        }*/
+
+        // The above code section was just for testing if kicking works
+    }
+
+    protected override void Move()
+    {
+        base.Move();
+
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.flipX = movementDirection.x > 0;
+        }
+    }
+
+    private void ShellMode()
+    {
+        currentState = KoopaState.Shell;
+
+        if (shellSprite != null)
+        {
+            spriteRenderer.sprite = shellSprite;
+        }
+
+        if (animator != null)
+        {
+            animator.enabled = false;
+        }
+
+        if (boxCollider != null) boxCollider.enabled = false;
+        if (circleCollider != null) circleCollider.enabled = true;
+
+        SetMovementEnabled(false);
+
+        rb.linearVelocity = Vector2.zero;
+        rb.gravityScale = 1;
+
+        gameObject.tag = "Shell";
+        Debug.Log("Koopa entered shell mode!");
+
+        StartCoroutine(ShellTimer());
+    }
+
+    private IEnumerator ShellTimer()
+    {
+        yield return new WaitForSeconds(13);
+        if (currentState == KoopaState.Shell)
+        {
+            ExitShellMode();
+        }
+    }
+
+    private void ExitShellMode()
+    {
+        currentState = KoopaState.Walking;
+
+        if (animator != null)
+        {
+            animator.enabled = true;
+        }
+
+        if (boxCollider != null) boxCollider.enabled = true;
+        if (circleCollider != null) circleCollider.enabled = false;
+
+        speed = originalSpeed;
+
+        SetMovementEnabled(true);
+
+        gameObject.tag = "Koopa";
+        Debug.Log("Koopa exited shell mode!");
+    }
+
+    //This function should be called by Mario when he is next to a shell and presses jump button to kick it
+    public void KickShell(Collision2D collision)
+    {
+        currentState = KoopaState.ShellMoving;
+        speed = originalSpeed * 4;
+
+        //float playerDirection = Mathf.Sign(collision.transform.position.x - transform.position.x);
+        //movementDirection = new Vector2(playerDirection, 0);
+
+        //Above code for testing
+
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+        }
+        SetMovementEnabled(true);
+
+        gameObject.tag = "Shell Moving";
+
+        Debug.Log("Koopa shell kicked!");
+    }
+
+    protected override void HitSequence()
+    {
+        base.HitSequence();
+        spriteRenderer.sprite = shellSprite;
+    }
+}

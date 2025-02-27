@@ -6,15 +6,20 @@ public abstract class Enemy : MonoBehaviour
     public Direction startingDirection = Direction.Right; // Default starting direction
 
     public float speed = 1f;
-    private Vector2 movementDirection;
-    private Rigidbody2D rb;
+    protected Vector2 movementDirection;
 
-    void Start()
+    protected Rigidbody2D rb;
+    protected Animator animator;
+    protected SpriteRenderer spriteRenderer;
+
+    private bool movementEnabled = true;
+
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Ensure Rigidbody2D is dynamic for collision detection
-        rb.isKinematic = false;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
 
         // Set initial movement direction
@@ -23,26 +28,38 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        Move();
+        if (movementEnabled)
+        {
+            Move();
+        }
     }
 
-    protected void Move()
+    protected virtual void Move()
     {
         rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
     }
 
+    public void SetMovementEnabled(bool isEnabled)
+    {
+        movementEnabled = isEnabled;
+        if (!movementEnabled)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            rb.isKinematic = true;
+        }
+    }
+
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Fire"))
+        if (collision.gameObject.CompareTag("Fire") || collision.gameObject.CompareTag("Shell Moving"))
         {
-            // Enemy dies on fire collision
-            Destroy(gameObject);
+            HitSequence();
         }
         else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Floor"))
         {
             Debug.Log("Object hit!");
 
-            // Reverse movement direction on collision
             movementDirection = (movementDirection == Vector2.left) ? Vector2.right : Vector2.left;
         }
         else
@@ -52,15 +69,27 @@ public abstract class Enemy : MonoBehaviour
             if (contact.normal.y < -0.5f) // Player is above the enemy
             {
                 HandlePlayerStomp(collision);
-
-                // Make the player bounce up
-                Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
-                if (playerRb != null)
-                {
-                    playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 5f); // Adjust bounce height as needed
-                }
             }
         }
+    }
+
+    protected virtual void HitSequence()
+    {
+        SetMovementEnabled(false);
+
+        rb.isKinematic = false;
+        rb.gravityScale = 1f;
+        animator.enabled = false;
+        spriteRenderer.flipY = true;
+
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        foreach (var col in colliders)
+        {
+            col.enabled = false;
+        }
+
+        rb.linearVelocity = new Vector2(0f, 3f); 
+        Destroy(gameObject, 2f);   
     }
 
     protected abstract void HandlePlayerStomp(Collision2D collision);
