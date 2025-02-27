@@ -681,7 +681,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 0000000087d1d9bbe7ebf9ce
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1512,6 +1512,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1120501848853247353, guid: 115ddf70c0e41ec4c9669b66ae90bdcb, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120501848853247353, guid: 115ddf70c0e41ec4c9669b66ae90bdcb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1120501848853247353, guid: 115ddf70c0e41ec4c9669b66ae90bdcb, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -822481945
+      objectReference: {fileID: 0}
     - target: {fileID: 7566467545539951815, guid: 115ddf70c0e41ec4c9669b66ae90bdcb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2335123
