@@ -20,6 +20,7 @@ public class Goomba : Enemy
 
     protected override void HandlePlayerStomp(Collision2D collision)
     {
+        SetMovementEnabled(false);
         Die();
     }
 }

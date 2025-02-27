@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3047904864743014131}
   m_Layer: 0
   m_Name: Mario
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,6 +309,10 @@ MonoBehaviour:
   momentumDecelerationSmall: 0.002319336
   momentumDecelerationMedium: 0.0031738281
   momentumDecelerationLarge: 0.003479004
+  momentumAccelerationSmall: 0.002319336
+  momentumAccelerationLarge: 0.003479004
+  maxAirSpeedSmall: 0.09765625
+  maxAirSpeedLarge: 0.16015625
   jumpSpeedSmall: 0.25
   jumpSpeedMedium: 0.25
   jumpSpeedLarge: 0.3125

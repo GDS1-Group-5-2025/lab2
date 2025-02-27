@@ -63,12 +63,19 @@ public class KoopaTroopa : Enemy
         if (shellSprite != null)
         {
             spriteRenderer.sprite = shellSprite;
+            //spriteRenderer.transform.localPosition = new Vector3(spriteRenderer.transform.localPosition.x, 0.5f, spriteRenderer.transform.localPosition.z);
+        }
+
+        if (animator != null)
+        {
+            animator.enabled = false;
         }
 
         if (boxCollider != null) boxCollider.enabled = false;
         if (circleCollider != null) circleCollider.enabled = true;
 
-        speed = 0;
+        SetMovementEnabled(false);
+
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 1;
 
@@ -89,11 +96,19 @@ public class KoopaTroopa : Enemy
     private void ExitShellMode()
     {
         currentState = KoopaState.Walking;
+        spriteRenderer.transform.localPosition = new Vector3(spriteRenderer.transform.localPosition.x, 0f, spriteRenderer.transform.localPosition.z);
+
+        if (animator != null)
+        {
+            animator.enabled = true;
+        }
 
         if (boxCollider != null) boxCollider.enabled = true;
         if (circleCollider != null) circleCollider.enabled = false;
 
         speed = originalSpeed;
+
+        SetMovementEnabled(true);
 
         Debug.Log("Koopa exited shell mode!");
     }
@@ -105,6 +120,11 @@ public class KoopaTroopa : Enemy
 
         float playerDirection = Mathf.Sign(collision.transform.position.x - transform.position.x);
         movementDirection = new Vector2(playerDirection, 0);
+
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+        }
 
         Debug.Log("Koopa shell kicked!");
     }

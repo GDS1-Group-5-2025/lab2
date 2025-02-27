@@ -10,6 +10,8 @@ public abstract class Enemy : MonoBehaviour
     protected Rigidbody2D rb;
     protected Animator animator;
 
+    private bool movementEnabled = true;
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,7 +25,10 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        Move();
+        if (movementEnabled)
+        {
+            Move();
+        }
     }
 
     protected virtual void Move()
@@ -31,18 +36,27 @@ public abstract class Enemy : MonoBehaviour
         rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
     }
 
+    public void SetMovementEnabled(bool isEnabled)
+    {
+        movementEnabled = isEnabled;
+        if (!movementEnabled)
+        {
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            rb.isKinematic = true;
+        }
+    }
+
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Fire"))
         {
-            // Enemy dies on fire collision
             Destroy(gameObject);
         }
         else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Floor"))
         {
             Debug.Log("Object hit!");
 
-            // Reverse movement direction on collision
             movementDirection = (movementDirection == Vector2.left) ? Vector2.right : Vector2.left;
         }
         else
@@ -52,13 +66,6 @@ public abstract class Enemy : MonoBehaviour
             if (contact.normal.y < -0.5f) // Player is above the enemy
             {
                 HandlePlayerStomp(collision);
-
-                // Make the player bounce up
-                Rigidbody2D playerRb = collision.gameObject.GetComponent<Rigidbody2D>();
-                if (playerRb != null)
-                {
-                    playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, 5f); // Adjust bounce height as needed
-                }
             }
         }
     }
