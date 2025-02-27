@@ -102,7 +102,7 @@ public class MarioMovement : MonoBehaviour
         float newXSpeedInSmwUnits;
 
         // We're on the ground if the vertical speed is close to 0
-        if (Mathf.Abs(currentYSpeedInSmwUnits) < 0.01f)
+        if (Mathf.Abs(currentYSpeedInSmwUnits) < 0.05f)
         {
             // Calculate new speed in SMW units per frame
             newXSpeedInSmwUnits = CalculateNewXGroundSpeed(currentXSpeedInSmwUnits);
@@ -275,7 +275,7 @@ public class MarioMovement : MonoBehaviour
         isJumping = context.ReadValue<float>() > 0;
 
         // only jump if not currently pressing the jump button and if not falling
-        if (isJumping && !wasJumping && Mathf.Abs(_rb.linearVelocity.y) < 0.01f)
+        if (isJumping && !wasJumping && Mathf.Abs(_rb.linearVelocity.y) < 0.05f)
         {
             Jump();
         }
