@@ -5,14 +5,22 @@ public enum MarioStateEnum
     Small,
     Big,
     Fire,
-    Dead,
-    Invincible
+    Dead
 }
 
 public class MarioState : MonoBehaviour
 {
     public MarioStateEnum currentState = MarioStateEnum.Small;
     public bool isInvincible;
+    private float invincibleDuration;
+
+    void Update()
+    {
+        if (isInvincible){
+            invincibleDuration -= Time.deltaTime;
+            if(invincibleDuration <= 0){ isInvincible = false; }
+        }
+    }
 
     public MarioStateEnum TakeDamage()
     {
@@ -39,7 +47,8 @@ public class MarioState : MonoBehaviour
         };
     }
 
-    public void InvincibleStar(){
-        currentState = MarioStateEnum.Invincible;
+    public void SetIsInvincible(bool ans){
+        isInvincible = ans;
+        invincibleDuration = 30f;
     }
 }
