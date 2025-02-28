@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      NES - Super Mario Bros - Items Objects and NPCs_0: -1255358982633879394
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
