@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 422752716877360548}
   - component: {fileID: 8242954744409225535}
   - component: {fileID: 3047904864743014131}
+  - component: {fileID: 3254555280103249996}
   m_Layer: 0
   m_Name: Mario
   m_TagString: Player
@@ -328,3 +329,18 @@ MonoBehaviour:
   initialXSpeedWhenJumping: 0
   lastGravity: 0.009765625
   lastDampenedGravity: 0.009765625
+--- !u!114 &3254555280103249996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941571817895590636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59aae642a3c24df499d23ed6d40db336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  isInvincible: 0
+  invincibleDuration: 0

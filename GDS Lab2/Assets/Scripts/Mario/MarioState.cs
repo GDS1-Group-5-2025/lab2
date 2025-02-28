@@ -12,7 +12,7 @@ public class MarioState : MonoBehaviour
 {
     public MarioStateEnum currentState = MarioStateEnum.Small;
     public bool isInvincible;
-    private float invincibleDuration;
+    [SerializeField] private float invincibleDuration;
 
     void Update()
     {

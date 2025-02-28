@@ -70,6 +70,7 @@ public abstract class Enemy : MonoBehaviour
             {
                 HandlePlayerStomp(collision);
             }
+            if(collision.gameObject.GetComponent<MarioState>().isInvincible){ HitSequence(); }
         }
     }
 
