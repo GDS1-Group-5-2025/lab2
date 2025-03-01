@@ -88,6 +88,8 @@ public abstract class Enemy : MonoBehaviour
                 float stompForce = 15f;
                 marioRb.AddForce(Vector2.up * stompForce, ForceMode2D.Impulse);
             }
+
+            AudioManager.Instance.PlaySFX("stomp");
         }
 
         // Mario takes damage
