@@ -81,6 +81,13 @@ public abstract class Enemy : MonoBehaviour
         if (contact.normal.y < -0.5f)
         {
             HandlePlayerStomp(collision);
+
+            Rigidbody2D marioRb = collision.gameObject.GetComponent<Rigidbody2D>();
+            if (marioRb != null)
+            {
+                float stompForce = 15f;
+                marioRb.AddForce(Vector2.up * stompForce, ForceMode2D.Impulse);
+            }
         }
 
         // Mario takes damage
