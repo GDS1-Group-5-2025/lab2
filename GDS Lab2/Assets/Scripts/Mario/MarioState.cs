@@ -13,13 +13,26 @@ public class MarioState : MonoBehaviour
     public MarioStateEnum currentState = MarioStateEnum.Small;
     public bool isInvincible;
     [SerializeField] private float invincibleDuration;
+    private bool wasInvincible;
 
     void Update()
     {
-        if (isInvincible){
-            invincibleDuration -= Time.deltaTime;
-            if(invincibleDuration <= 0){ isInvincible = false; }
+        if (isInvincible && !wasInvincible)
+        {
+            MusicManager.Instance.StartInvincibility();
         }
+
+        if (isInvincible)
+        {
+            invincibleDuration -= Time.deltaTime;
+            if (invincibleDuration <= 0f)
+            {
+                isInvincible = false;
+                MusicManager.Instance.StopInvincibility();
+            }
+        }
+
+        wasInvincible = isInvincible;
     }
 
     public MarioStateEnum TakeDamage()
@@ -61,11 +74,25 @@ public class MarioState : MonoBehaviour
 
     public void SetIsInvincible(bool ans){
         isInvincible = ans;
-        invincibleDuration = 30f;
+
+        if (isInvincible)
+        {
+            invincibleDuration = 30f;
+            Debug.Log("Invincible!");
+        }
+        else
+        {
+            invincibleDuration = 0f;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("PowerUp")){ PowerUp(); Destroy(collision.gameObject); }
+        if (collision.gameObject.CompareTag("PowerUp"))
+        {
+            PowerUp();
+            Destroy(collision.gameObject);
+            AudioManager.Instance.PlaySFX("powerup");
+        }
     }
 }

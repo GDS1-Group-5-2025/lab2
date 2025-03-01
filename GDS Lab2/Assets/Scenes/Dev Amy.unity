@@ -557,7 +557,7 @@ MonoBehaviour:
   - clipName: underground
     clip: {fileID: 8300000, guid: 29f613ad3375fe941b7f64109f62a14b, type: 3}
   - clipName: invincibility
-    clip: {fileID: 8300000, guid: 2d99c87f202234546899985b42855b2a, type: 3}
+    clip: {fileID: 8300000, guid: 9b34479d0158a5043bdb88424c5016be, type: 3}
   - clipName: ground hurry
     clip: {fileID: 8300000, guid: f47fd58e4311fbc4097fc4d4be7464ea, type: 3}
   - clipName: underground hurry
@@ -568,6 +568,9 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d9d8ad10aadb4b7448e524d4d52d2799, type: 3}
   - clipName: stage clear
     clip: {fileID: 8300000, guid: 7fa08dab82acc444cb997dfbb61bbdc1, type: 3}
+  isUnderground: 0
+  isHurry: 0
+  isInvincible: 0
 --- !u!82 &316532892
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1139,6 +1142,14 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 3254555280103249996, guid: 115ddf70c0e41ec4c9669b66ae90bdcb, type: 3}
+      propertyPath: isInvincible
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3254555280103249996, guid: 115ddf70c0e41ec4c9669b66ae90bdcb, type: 3}
+      propertyPath: invincibleDuration
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7566467545539951815, guid: 115ddf70c0e41ec4c9669b66ae90bdcb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.0741034

@@ -51,7 +51,7 @@ public class MarioLifeSystem : MonoBehaviour
 
     private IEnumerator RespawnMario()
     {
-        MusicManager.Instance.PlayMusic("death");
+        MusicManager.Instance.PlayNonLoopingClipThenRevert("death");
         DisableUserInput();
         yield return new WaitForSeconds(2);
 
@@ -80,7 +80,7 @@ public class MarioLifeSystem : MonoBehaviour
 
     private void GameOver()
     {
-        MusicManager.Instance.PlayMusic("game over");
+        MusicManager.Instance.PlayNonLoopingClipThenRevert("game over");
         Debug.Log("GAME OVER!");
         //trigger game over UI
     }
