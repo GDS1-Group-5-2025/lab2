@@ -34,6 +34,18 @@ public class MarioState : MonoBehaviour
             _ => currentState
         };
 
+        if (currentState == MarioStateEnum.Dead)
+        {
+            if (MarioLifeSystem.Instance != null)
+            {
+                MarioLifeSystem.Instance.HandleMarioDeath();
+            }
+            else
+            {
+                Debug.Log("MarioLifeSystem not found");
+            }
+        }
+
         return currentState;
     }
 

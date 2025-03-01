@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8242954744409225535}
   - component: {fileID: 3047904864743014131}
   - component: {fileID: 3254555280103249996}
+  - component: {fileID: 2292600013072410581}
   m_Layer: 0
   m_Name: Mario
   m_TagString: Player
@@ -344,3 +345,16 @@ MonoBehaviour:
   currentState: 0
   isInvincible: 0
   invincibleDuration: 0
+--- !u!114 &2292600013072410581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941571817895590636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f843d7d6b7a8e8042b2ac0733b3f8a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLives: 3
