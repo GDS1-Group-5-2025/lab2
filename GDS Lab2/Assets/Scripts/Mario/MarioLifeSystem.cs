@@ -8,6 +8,8 @@ public class MarioLifeSystem : MonoBehaviour
     private MarioState _marioState;
 
     public int maxLives = 3;
+    public Vector2 respawnPosition = new Vector2(3.4f, 1f);
+
     private int livesRemaining;
 
     private void Awake()
@@ -48,7 +50,7 @@ public class MarioLifeSystem : MonoBehaviour
         _marioState.currentState = MarioStateEnum.Small;
         _marioState.SetIsInvincible(false);
 
-        transform.position = Vector3.zero; //respawn at start
+        transform.position = respawnPosition;
     }
 
     private void GameOver()
