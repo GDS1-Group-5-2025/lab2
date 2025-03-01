@@ -63,4 +63,9 @@ public class MarioState : MonoBehaviour
         isInvincible = ans;
         invincibleDuration = 30f;
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("PowerUp")){ PowerUp(); Destroy(collision.gameObject); }
+    }
 }
