@@ -2,16 +2,16 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PowerUps : MonoBehaviour
+public class PowerUps1 : MonoBehaviour
 {
     [SerializeField]
-    private Vector2 initialVelocity;
+    Vector2 initialVelocity;
 
     [SerializeField]
-    private float reenableColliderAfter;
+    float reenableColliderAfter;
 
-    private Rigidbody2D _rigidbody;
-    private Collider2D _collider;
+    Rigidbody2D _rigidbody;
+    Collider2D _collider;
 
     void Start()
     {
@@ -32,7 +32,7 @@ public class PowerUps : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        var player = other.collider.GetComponent<Mario>();
+        var player = other.collider.GetComponent<Player>();
         if (player != null)
         {
             Destroy(gameObject);

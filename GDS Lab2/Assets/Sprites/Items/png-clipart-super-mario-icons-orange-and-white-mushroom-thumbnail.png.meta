@@ -103,13 +103,13 @@ TextureImporter:
       name: png-clipart-super-mario-icons-orange-and-white-mushroom-thumbnail_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 46
         y: 0
-        width: 348
+        width: 302
         height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 46, w: 0}
       customData: 
       outline: []
       physicsShape: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5b3acdf8dfa4b47e5a2fcdd490827a6e
     internalID: 0
     vertices: []
     indices: 
@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      png-clipart-super-mario-icons-orange-and-white-mushroom-thumbnail_0: 7506336894238399812
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
