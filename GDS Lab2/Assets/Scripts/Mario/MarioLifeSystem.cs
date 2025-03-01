@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(MarioState))]
 public class MarioLifeSystem : MonoBehaviour
@@ -13,7 +14,7 @@ public class MarioLifeSystem : MonoBehaviour
     public int maxLives = 3;
     public Vector2 respawnPosition = new Vector2(3.4f, 1f);
 
-    private int livesRemaining;
+    public int livesRemaining;
 
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class MarioLifeSystem : MonoBehaviour
 
         if (livesRemaining > 0)
         {
+            SceneManager.LoadScene("Loading Screen");
             StartCoroutine(RespawnMario());
         }
         else
@@ -53,7 +55,7 @@ public class MarioLifeSystem : MonoBehaviour
     {
         MusicManager.Instance.PlayNonLoopingClipThenRevert("death");
         DisableUserInput();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
 
         _marioState.currentState = MarioStateEnum.Small;
         _marioState.SetIsInvincible(false);

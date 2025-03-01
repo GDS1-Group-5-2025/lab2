@@ -515,6 +515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBeforeLoadingMainScene: 2
+  livesText: {fileID: 444022073}
 --- !u!1 &444022071
 GameObject:
   m_ObjectHideFlags: 0
