@@ -36,7 +36,6 @@ public class MarioState : MonoBehaviour
 
         if (currentState == MarioStateEnum.Dead)
         {
-            AudioManager.Instance.PlaySFX("death");
             if (MarioLifeSystem.Instance != null)
             {
                 MarioLifeSystem.Instance.HandleMarioDeath();
