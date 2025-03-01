@@ -21,6 +21,13 @@ public class Goomba : Enemy
     protected override void HandlePlayerStomp(Collision2D collision)
     {
         SetMovementEnabled(false);
+
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        foreach (var col in colliders)
+        {
+            col.enabled = false;
+        }
+
         Die();
     }
 }

@@ -52,23 +52,58 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
+        // Fire or moving shell
         if (collision.gameObject.CompareTag("Fire") || collision.gameObject.CompareTag("Shell Moving"))
         {
             HitSequence();
+            return;
         }
-        else if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Floor"))
+
+        // If collision is not with player or floor, change direction
+        if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Floor"))
         {
             Debug.Log("Object hit!");
 
             movementDirection = (movementDirection == Vector2.left) ? Vector2.right : Vector2.left;
         }
+
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            return;
+        }
+
+        // Collided object is player
+        MarioState marioState = collision.gameObject.GetComponent<MarioState>();
+        if (marioState == null) return;
+
+        ContactPoint2D contact = collision.GetContact(0);
+        // Stomp
+        if (contact.normal.y < -0.5f)
+        {
+            HandlePlayerStomp(collision);
+
+            Rigidbody2D marioRb = collision.gameObject.GetComponent<Rigidbody2D>();
+            if (marioRb != null)
+            {
+                float stompForce = 15f;
+                marioRb.AddForce(Vector2.up * stompForce, ForceMode2D.Impulse);
+            }
+
+            AudioManager.Instance.PlaySFX("stomp");
+        }
+
+        // Mario takes damage
         else
         {
-            // Check if the player is landing on top
-            ContactPoint2D contact = collision.GetContact(0);
-            if (contact.normal.y < -0.5f) // Player is above the enemy
+            if (marioState.isInvincible)
             {
-                HandlePlayerStomp(collision);
+                // Mario kills enemy on contact
+                HitSequence();
+            }
+            else
+            {
+                // Mario takes damage
+                marioState.TakeDamage();
             }
         }
     }

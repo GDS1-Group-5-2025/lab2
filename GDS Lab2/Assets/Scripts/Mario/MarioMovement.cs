@@ -233,18 +233,24 @@ public class MarioMovement : MonoBehaviour
             jumpSpeed = jumpSpeedSmall;
             lastGravity = normalGravitySmall;
             lastDampenedGravity = dampenedGravitySmall;
+
+            AudioManager.Instance.PlaySFX("jump small");
         }
         else if (initialXSpeedWhenJumping < HexToFloat(0x02500))
         {
             jumpSpeed = jumpSpeedMedium;
             lastGravity = normalGravityMedium;
             lastDampenedGravity = dampenedGravityMedium;
+
+            AudioManager.Instance.PlaySFX("jump small");
         }
         else
         {
             jumpSpeed = jumpSpeedLarge;
             lastGravity = normalGravityLarge;
             lastDampenedGravity = dampenedGravityLarge;
+
+            AudioManager.Instance.PlaySFX("jump super");
         }
 
         // Apply the jump speed

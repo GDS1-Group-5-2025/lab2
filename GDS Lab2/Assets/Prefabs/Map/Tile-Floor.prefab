@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7365869974376010450}
   m_Layer: 0
   m_Name: Tile-Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 036ad949bd689d14e8c2944204a1e48d, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -123,7 +123,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 01aa34c01d2dd5a4b99c7eda05a0401e, type: 3}
+  m_Sprite: {fileID: -4373184736405950995, guid: 1687a720e7c7e4d8eaf6d909f8f382bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 270353590897965254, guid: 859aa731e23f752439aa98162e3f2f12, type: 3}
       propertyPath: m_Name
-      value: BrickBlock Variant
+      value: BrickBlock
       objectReference: {fileID: 0}
     - target: {fileID: 2631630002232746734, guid: 859aa731e23f752439aa98162e3f2f12, type: 3}
       propertyPath: m_Controller
