@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System;
 
 [RequireComponent(typeof(MarioState))]
 public class MarioLifeSystem : MonoBehaviour
@@ -15,6 +16,7 @@ public class MarioLifeSystem : MonoBehaviour
     public Vector2 respawnPosition = new Vector2(3.4f, 1f);
 
     public int livesRemaining;
+    private bool isGameOver = false;
 
     private void Awake()
     {
@@ -47,12 +49,15 @@ public class MarioLifeSystem : MonoBehaviour
         }
         else
         {
-            GameOver();
+            isGameOver = true;
+            GameOverManager.Instance.GameOver();
         }
     }
 
     private IEnumerator RespawnMario()
     {
+        if (isGameOver) yield break;
+
         MusicManager.Instance.PlayNonLoopingClipThenRevert("death");
         DisableUserInput();
         yield return new WaitForSeconds(3);
@@ -78,12 +83,5 @@ public class MarioLifeSystem : MonoBehaviour
         {
             _playerInput.enabled = true;
         }
-    }
-
-    private void GameOver()
-    {
-        MusicManager.Instance.PlayNonLoopingClipThenRevert("game over");
-        Debug.Log("GAME OVER!");
-        //trigger game over UI
     }
 }
