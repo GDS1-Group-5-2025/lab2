@@ -97,4 +97,11 @@ public class MarioState : MonoBehaviour
             MusicManager.Instance.StartInvincibility();
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.GetComponent<ItemData>()?.GetItemName() == "Coin"){
+            Destroy(collision.gameObject);
+        }
+    }
 }
