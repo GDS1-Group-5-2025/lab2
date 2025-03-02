@@ -15,6 +15,7 @@ public class SecretEntrance : MonoBehaviour
                 player.gameObject.GetComponent<CompositeCollider2D>().isTrigger = false;
                 mainCam.GetComponent<Camera>().enabled = false;
                 secretCam.GetComponent<Camera>().enabled = true;
+                player.gameObject.GetComponent<MarioMovement>().enabled = true;
             }
         }
     }
@@ -31,6 +32,7 @@ public class SecretEntrance : MonoBehaviour
             player = collision.gameObject;
             player.gameObject.GetComponent<CompositeCollider2D>().isTrigger = true;
             entering = true;
+            player.gameObject.GetComponent<MarioMovement>().enabled = false;
         }
     }
 }
