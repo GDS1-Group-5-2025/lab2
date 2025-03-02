@@ -215,3 +215,4 @@ MonoBehaviour:
   moving: 0
   origY: 0
   moveDir: 1
+  rb: {fileID: 0}

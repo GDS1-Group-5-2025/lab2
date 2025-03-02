@@ -214,5 +214,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moving: 0
   origY: 0
-  gracePrd: 0
   moveDir: 1
