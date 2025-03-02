@@ -5,6 +5,7 @@ public class KoopaTroopa : Enemy
 {
     private enum KoopaState { Walking, Shell, ShellMoving }
     private KoopaState _currentState = KoopaState.Walking;
+    private Sprite _startingSprite;
 
     [SerializeField] private Sprite shellSprite;
 
@@ -29,6 +30,7 @@ public class KoopaTroopa : Enemy
     protected override void Start()
     {
         base.Start();
+        _startingSprite = spriteRenderer.sprite;
         InitializeKoopa();
     }
 
@@ -139,5 +141,15 @@ public class KoopaTroopa : Enemy
     {
         base.HitSequence();
         spriteRenderer.sprite = shellSprite;
+    }
+
+    protected new void Reset()
+    {
+        base.Reset();
+        _currentState = KoopaState.Walking;
+        spriteRenderer.sprite = _startingSprite;
+        speed = _originalSpeed;
+        if (_circleCollider) _circleCollider.enabled = false;
+        if (_boxCollider) _boxCollider.enabled = true;
     }
 }

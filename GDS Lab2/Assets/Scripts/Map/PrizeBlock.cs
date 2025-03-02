@@ -36,4 +36,12 @@ public class PrizeBlock : MonoBehaviour
             Instantiate(item, transform.position, Quaternion.identity);
         }
     }
+
+    public void Reset()
+    {
+        // Set the state to "Normal"
+        _state = PrizeBlockState.Normal;
+        // Reset the animator
+        animator.Rebind();
+    }
 }

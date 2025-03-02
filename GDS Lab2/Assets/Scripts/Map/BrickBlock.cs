@@ -6,7 +6,6 @@ internal enum BrickBlockState // Enum for the state of the block
     Exploded // Hit state
 }
 
-// PrizeBlock is a class that represents a block that contains a prize and is consumed after being hit by any type of player
 public class BrickBlock : MonoBehaviour
 {
     private static readonly int Bump = Animator.StringToHash("Bump");
@@ -39,5 +38,13 @@ public class BrickBlock : MonoBehaviour
             animator.SetTrigger(Explode);
             _state = BrickBlockState.Exploded;
         }
+    }
+
+    public void Reset()
+    {
+        // Set the state to "Normal"
+        _state = BrickBlockState.Normal;
+        // Reset the animator
+        animator.Rebind();
     }
 }
