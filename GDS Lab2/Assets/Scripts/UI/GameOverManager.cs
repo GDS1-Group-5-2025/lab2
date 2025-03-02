@@ -6,6 +6,8 @@ public class GameOverManager : MonoBehaviour
     public static GameOverManager Instance { get; private set; }
     public UnityEvent OnGameOver;
 
+    public int livesRemaining = 3;
+
     private void Awake()
     {
         if (Instance == null)

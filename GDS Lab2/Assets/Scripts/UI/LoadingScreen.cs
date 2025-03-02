@@ -12,10 +12,10 @@ public class LoadingScreen : MonoBehaviour
     {
         Debug.Log("Loading Main Level after " + delayBeforeLoadingMainScene + " seconds");
 
-        // Display lives if MarioLifeSystem exists
-        if (MarioLifeSystem.Instance != null)
+        // Display lives if GameOverManager exists
+        if (GameOverManager.Instance != null)
         {
-            livesText.text = MarioLifeSystem.Instance.livesRemaining.ToString();
+            livesText.text = GameOverManager.Instance.livesRemaining.ToString();
         }
         else
         {

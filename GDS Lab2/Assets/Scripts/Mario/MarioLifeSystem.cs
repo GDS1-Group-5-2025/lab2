@@ -16,11 +16,9 @@ public class MarioLifeSystem : MonoBehaviour
 
     private GameObject _camera;
 
-    public int maxLives = 3;
     public Transform respawnPosition;
     public Transform cameraRespawnPosition;
 
-    public int livesRemaining;
     private bool _isGameOver;
 
     private void Awake()
@@ -40,7 +38,6 @@ public class MarioLifeSystem : MonoBehaviour
 
     void Start()
     {
-        livesRemaining = maxLives;
         _camera = Camera.main?.gameObject;
         _enemyManager = FindFirstObjectByType<EnemyManager>();
         _interactablesManager = FindFirstObjectByType<InteractablesManager>();
@@ -48,10 +45,11 @@ public class MarioLifeSystem : MonoBehaviour
 
     public void HandleMarioDeath()
     {
-        livesRemaining--;
+        GameOverManager.Instance.livesRemaining--;
 
-        if (livesRemaining > 0)
+        if (GameOverManager.Instance.livesRemaining > 0)
         {
+            
             SceneManager.LoadScene("Loading Screen");
             StartCoroutine(RespawnMario());
         }
