@@ -689,7 +689,6 @@ Transform:
   - {fileID: 1607056469}
   - {fileID: 1562813567}
   - {fileID: 427852398}
-  - {fileID: 1465628677}
   - {fileID: 1897823857}
   - {fileID: 735963109}
   - {fileID: 175672760}
@@ -5082,7 +5081,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 126078276}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1089819521794177642, guid: fcdb79e8a3ce14a23b2c3089c46899a3, type: 3}
       propertyPath: m_SortingLayer
@@ -5156,11 +5155,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1955017611}
   m_SourcePrefab: {fileID: 100100000, guid: fcdb79e8a3ce14a23b2c3089c46899a3, type: 3}
---- !u!4 &1465628677 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3529427107634021466, guid: fcdb79e8a3ce14a23b2c3089c46899a3, type: 3}
-  m_PrefabInstance: {fileID: 1465628676}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1468178587
 GameObject:
   m_ObjectHideFlags: 0
@@ -7972,7 +7966,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 108664819}
   - {fileID: 619394802}
   - {fileID: 585854767}
   - {fileID: 126078276}
@@ -7980,6 +7973,8 @@ SceneRoots:
   - {fileID: 1560001089}
   - {fileID: 1468178590}
   - {fileID: 761925649}
+  - {fileID: 108664819}
+  - {fileID: 1465628676}
   - {fileID: 179120916}
   - {fileID: 1599109346}
   - {fileID: 703559174}
