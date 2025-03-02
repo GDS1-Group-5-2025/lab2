@@ -18,7 +18,7 @@ public class SecretExit : MonoBehaviour
                 player.transform.position = new Vector2(164.5f, 1);
                 mainCam.GetComponent<Camera>().enabled = true;
                 secretCam.GetComponent<Camera>().enabled = false;
-                exitPipe.transform.GetChild(1).gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
+                exitPipe.transform.GetChild(2).gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
             }
         }
         if(exiting){ 
@@ -42,7 +42,7 @@ public class SecretExit : MonoBehaviour
                 player = collision.gameObject;
                 player.gameObject.GetComponent<MarioMovement>().enabled = false;
                 this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
-                exitPipe.gameObject.transform.GetChild(1).GetComponent<BoxCollider2D>().isTrigger = true;
+                exitPipe.gameObject.transform.GetChild(2).GetComponent<BoxCollider2D>().isTrigger = true;
                 entering = true;
             }
         }
