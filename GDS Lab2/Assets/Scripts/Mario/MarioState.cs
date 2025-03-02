@@ -17,11 +17,6 @@ public class MarioState : MonoBehaviour
 
     void Update()
     {
-        if (isInvincible && !wasInvincible)
-        {
-            MusicManager.Instance.StartInvincibility();
-        }
-
         if (isInvincible)
         {
             invincibleDuration -= Time.deltaTime;
@@ -86,13 +81,19 @@ public class MarioState : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<ItemData>().GetItemName() == "PowerUp")
         {
             PowerUp();
             Destroy(collision.gameObject);
             AudioManager.Instance.PlaySFX("powerup");
+        }
+        if(collision.gameObject.GetComponent<ItemData>().GetItemName() == "Star"){
+            isInvincible = true;
+            invincibleDuration = 30;
+            Destroy(collision.gameObject);
+            MusicManager.Instance.StartInvincibility();
         }
     }
 }
