@@ -63,8 +63,6 @@ public abstract class Enemy : MonoBehaviour
         // If collision is not with player or floor, change direction
         if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Floor"))
         {
-            Debug.Log("Object hit!");
-
             movementDirection = (movementDirection == Vector2.left) ? Vector2.right : Vector2.left;
         }
 
