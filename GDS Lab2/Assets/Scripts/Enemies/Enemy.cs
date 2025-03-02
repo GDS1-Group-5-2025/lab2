@@ -38,6 +38,12 @@ public abstract class Enemy : MonoBehaviour
         {
             Move();
         }
+        if(isDead && deadTimer <= 0){
+            gameObject.SetActive(false);
+        }
+        else if(isDead){
+            deadTimer -= Time.deltaTime;
+        }
     }
 
     protected virtual void Move()
@@ -111,10 +117,11 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    private bool isDead = false;
+    private float deadTimer = 0;
     protected virtual void HitSequence()
     {
         SetMovementEnabled(false);
-
         rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 1f;
         animator.enabled = false;
@@ -127,12 +134,13 @@ public abstract class Enemy : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector2(0f, 3f);
-        gameObject.SetActive(false);
+        isDead = true; deadTimer = 3;
     }
 
     public void Reset()
     {
         gameObject.SetActive(true);
+        isDead = false;
         transform.position = _startingPosition;
         SetMovementEnabled(false);
         rb.bodyType = RigidbodyType2D.Kinematic;

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -5869336088643274207}
   - component: {fileID: -2245994566592380231}
   - component: {fileID: 8575763784136697587}
+  - component: {fileID: -6764926145356670980}
   m_Layer: 0
   m_Name: FireFlower
   m_TagString: Untagged
@@ -185,3 +186,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5.12, y: 5.12}
   m_EdgeRadius: 0
+--- !u!114 &-6764926145356670980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4398049062638302217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0508275d5cb4d41b039ebb742049d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: PowerUp
