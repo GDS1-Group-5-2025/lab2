@@ -4,12 +4,11 @@ using UnityEngine;
 public class MushroomMovement : MonoBehaviour
 {
     [SerializeField] private bool moving = false;
-    [SerializeField] private float origY, gracePrd;
+    [SerializeField] private float origY;
     [SerializeField] private int moveDir;
     void Start()
     {
         origY = this.transform.position.y;
-        gracePrd = 0f;
     }
     void Update()
     {
@@ -25,15 +24,13 @@ public class MushroomMovement : MonoBehaviour
         else{
             this.transform.position = new Vector2(this.transform.position.x + (moveDir*3*Time.deltaTime), this.transform.position.y);
         }
-        if(gracePrd > 0){ gracePrd -= Time.deltaTime;}
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(moving){
-            if(collision.gameObject.CompareTag("Wall") && gracePrd <= 0){
+            if(collision.gameObject.CompareTag("Wall")){
                 moveDir *= -1;
-                gracePrd = 0.5f;
             }
         }
     }

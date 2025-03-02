@@ -34,8 +34,10 @@ public class PrizeBlock : MonoBehaviour
         if (item)
         {
             Instantiate(item, transform.position, Quaternion.identity);
-            item.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            item.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            try{ item.gameObject.GetComponent<BoxCollider2D>().enabled = false; }
+            catch{}
+            try{ item.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0; }
+            catch{}
         }
     }
 
