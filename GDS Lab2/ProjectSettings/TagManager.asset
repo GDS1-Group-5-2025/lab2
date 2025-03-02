@@ -55,11 +55,11 @@ TagManager:
   - name: Tiles
     uniqueID: 2233253395
     locked: 0
-  - name: Ground
-    uniqueID: 1366143831
-    locked: 0
   - name: Player
     uniqueID: 3472485351
+    locked: 0
+  - name: Ground
+    uniqueID: 1366143831
     locked: 0
   - name: MovingPipe
     uniqueID: 980954137
