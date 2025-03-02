@@ -88,7 +88,7 @@ public class MarioState : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("PowerUp"))
+        if (collision.gameObject.GetComponent<ItemData>().GetItemName() == "PowerUp")
         {
             PowerUp();
             Destroy(collision.gameObject);
