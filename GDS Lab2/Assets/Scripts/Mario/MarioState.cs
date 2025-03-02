@@ -96,6 +96,13 @@ public class MarioState : MonoBehaviour
             Destroy(collision.gameObject);
             MusicManager.Instance.StartInvincibility();
         }
+
+        if (collision.gameObject.GetComponent<ItemData>()?.GetItemName() == "1up")
+        {
+            GameOverManager.Instance.livesRemaining++;
+            Destroy(collision.gameObject);
+            AudioManager.Instance.PlaySFX("powerup");
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
