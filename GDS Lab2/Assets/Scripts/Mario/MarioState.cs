@@ -89,7 +89,8 @@ public class MarioState : MonoBehaviour
             Destroy(collision.gameObject);
             AudioManager.Instance.PlaySFX("powerup");
         }
-        if(collision.gameObject.GetComponent<ItemData>().GetItemName() == "Star"){
+
+        if(collision.gameObject.GetComponent<ItemData>()?.GetItemName() == "Star"){
             isInvincible = true;
             invincibleDuration = 30;
             Destroy(collision.gameObject);
