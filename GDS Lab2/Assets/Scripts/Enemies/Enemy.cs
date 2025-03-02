@@ -83,11 +83,10 @@ public abstract class Enemy : MonoBehaviour
         {
             HandlePlayerStomp(collision);
 
-            var marioRb = collision.gameObject.GetComponent<Rigidbody2D>();
-            if (marioRb != null)
+            var marioMovement = collision.gameObject.GetComponent<MarioMovement>();
+            if (marioMovement != null)
             {
-                const float stompForce = 15f;
-                marioRb.AddForce(Vector2.up * stompForce, ForceMode2D.Impulse);
+                marioMovement.Stomp();
             }
 
             AudioManager.Instance.PlaySFX("stomp");
