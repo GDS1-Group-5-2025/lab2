@@ -33,8 +33,8 @@ public class MarioMovement : MonoBehaviour
     public float maxAirSpeedLarge = HexToFloat(0x02900); // startspeed >= 0x01900
 
     // Jumping - initial upward speed
-    public float jumpSpeedSmall = HexToFloat(0x04000); // speed < 0x01000
-    public float jumpSpeedMedium = HexToFloat(0x04000); // speed >= 0x01000 and < 0x02500
+    public float jumpSpeedSmall = HexToFloat(0x04400); // speed < 0x01000
+    public float jumpSpeedMedium = HexToFloat(0x04400); // speed >= 0x01000 and < 0x02500
     public float jumpSpeedLarge = HexToFloat(0x05000); // speed >= 0x02500
 
     // Jumping - normal gravity
