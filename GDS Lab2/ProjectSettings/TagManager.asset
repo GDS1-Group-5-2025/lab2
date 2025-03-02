@@ -61,5 +61,8 @@ TagManager:
   - name: Player
     uniqueID: 3472485351
     locked: 0
+  - name: MovingPipe
+    uniqueID: 980954137
+    locked: 0
   m_RenderingLayers:
   - Default
