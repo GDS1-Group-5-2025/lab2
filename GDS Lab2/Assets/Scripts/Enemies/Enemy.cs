@@ -1,10 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public abstract class Enemy : MonoBehaviour
 {
     public enum Direction { Left, Right }
     public Direction startingDirection = Direction.Right; // Default starting direction
+
+    private Vector3 _startingPosition;
 
     public float speed = 1f;
     protected Vector2 movementDirection;
@@ -25,6 +28,8 @@ public abstract class Enemy : MonoBehaviour
 
         // Set initial movement direction
         movementDirection = (startingDirection == Direction.Left) ? Vector2.left : Vector2.right;
+
+        _startingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 
     protected virtual void FixedUpdate()
@@ -122,7 +127,22 @@ public abstract class Enemy : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector2(0f, 3f);
-        Destroy(gameObject, 2f);
+        gameObject.SetActive(false);
+    }
+
+    public void Reset()
+    {
+        gameObject.SetActive(true);
+        transform.position = _startingPosition;
+        SetMovementEnabled(false);
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        spriteRenderer.flipY = false;
+        animator.enabled = true;
+        spriteRenderer.enabled = true;
+        foreach (var col in GetComponents<Collider2D>())
+        {
+            col.enabled = true;
+        }
     }
 
     protected abstract void HandlePlayerStomp(Collision2D collision);
