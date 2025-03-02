@@ -33,8 +33,8 @@ public class MarioMovement : MonoBehaviour
     public float maxAirSpeedLarge = HexToFloat(0x02900); // startspeed >= 0x01900
 
     // Jumping - initial upward speed
-    public float jumpSpeedSmall = HexToFloat(0x04000); // speed < 0x01000
-    public float jumpSpeedMedium = HexToFloat(0x04000); // speed >= 0x01000 and < 0x02500
+    public float jumpSpeedSmall = HexToFloat(0x04400); // speed < 0x01000
+    public float jumpSpeedMedium = HexToFloat(0x04400); // speed >= 0x01000 and < 0x02500
     public float jumpSpeedLarge = HexToFloat(0x05000); // speed >= 0x02500
 
     // Jumping - normal gravity
@@ -47,6 +47,9 @@ public class MarioMovement : MonoBehaviour
     public float dampenedGravityMedium = HexToFloat(0x001E0); // speed >= 0x01000 and < 0x02500
     public float dampenedGravityLarge = HexToFloat(0x00280); // speed >= 0x02500
 
+    // Stomp
+    public float stompSpeed = HexToFloat(0x04000);
+
     // Input
     public float xAxisInput;
     public bool isRunning;
@@ -57,6 +60,8 @@ public class MarioMovement : MonoBehaviour
     public float initialXSpeedWhenJumping;
     public float lastGravity = HexToFloat(0x00280); // default gravity
     public float lastDampenedGravity = HexToFloat(0x00280); // default dampened gravity
+    public bool isGrounded = true;
+    public float newXSpeedInSmwUnits;
 
     private Rigidbody2D _rb;
     private const float SmwFramerate = 60f; // SMW runs at 60 FPS
@@ -99,10 +104,8 @@ public class MarioMovement : MonoBehaviour
         var currentXSpeedInSmwUnits = velocity.x / SmwFramerate;
         var currentYSpeedInSmwUnits = velocity.y / SmwFramerate;
 
-        float newXSpeedInSmwUnits;
 
-        // We're on the ground if the vertical speed is close to 0
-        if (Mathf.Abs(currentYSpeedInSmwUnits) < 0.05f)
+        if (isGrounded)
         {
             // Calculate new speed in SMW units per frame
             newXSpeedInSmwUnits = CalculateNewXGroundSpeed(currentXSpeedInSmwUnits);
@@ -202,18 +205,18 @@ public class MarioMovement : MonoBehaviour
         };
 
         // Calculate acceleration and max speed
-        var acceleration = currentSpeed < 0x01900 ? momentumAccelerationSmall : momentumAccelerationLarge;
-        var maxAirSpeed = initialXSpeedWhenJumping < HexToFloat(0x01900) ? maxAirSpeedSmall : maxAirSpeedLarge;
+        var acceleration = currentSpeed <= 0x01900 ? momentumAccelerationSmall : momentumAccelerationLarge;
+        var maxAirSpeed = initialXSpeedWhenJumping <= HexToFloat(0x01900) ? maxAirSpeedSmall : maxAirSpeedLarge;
 
         // Input is against current direction - decelerate
-        if (Math.Sign(xAxisInput) != Math.Sign(currentSpeed))
+        if (currentSpeed > 0 && Math.Sign(xAxisInput) != Math.Sign(currentSpeed))
         {
             return currentSpeed > 0
                 ? Mathf.Max(currentSpeed - deceleration, 0)
                 : Mathf.Min(currentSpeed + deceleration, 0);
         }
 
-        // Input is in the same direction - accelerate (if below max speed)
+        // Input is in the same direction - accelerate
         currentSpeed += xAxisInput * acceleration;
 
         // Clamp to max speed
@@ -281,10 +284,24 @@ public class MarioMovement : MonoBehaviour
         isJumping = context.ReadValue<float>() > 0;
 
         // only jump if not currently pressing the jump button and if not falling
-        if (isJumping && !wasJumping && Mathf.Abs(_rb.linearVelocity.y) < 0.05f)
+        if (isJumping && !wasJumping && isGrounded)
         {
             Jump();
         }
+    }
+
+    public void Stomp()
+    {
+        // Get velocity value and convert to hex
+        var velocityHex = FloatToHex(Mathf.Abs(_rb.linearVelocity.y / SmwFramerate));
+
+        // Combine the higher bits of stompSpeed (0x04000) with lower bits of velocity
+        var combinedHex = (0x0F000 & 0x04000) | (0x00FFF & velocityHex);
+
+        // Convert back to float
+        var resultSpeed = HexToFloat(combinedHex) * SmwFramerate;
+
+        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, resultSpeed);
     }
 
     private static float HexToFloat(int hex)
@@ -305,4 +322,35 @@ public class MarioMovement : MonoBehaviour
         // Calculate result using the formula with multiplication instead of division
         return a + b * div16 + c * div256 + d * div4096 + e * div65536;
     }
+
+    private static int FloatToHex(float f)
+    {
+        f = Mathf.Abs(f);
+
+        // Extract integer part
+        var a = (int)f & 0xF;
+
+        // Extract fractional digits sequentially
+        var frac = f - (int)f;
+
+        frac *= 16;
+        var b = (int)frac & 0xF;
+
+        frac -= (int)frac;
+        frac *= 16;
+        var c = (int)frac & 0xF;
+
+        frac -= (int)frac;
+        frac *= 16;
+        var d = (int)frac & 0xF;
+
+        frac -= (int)frac;
+        frac *= 16;
+        var e = (int)(frac + 0.5f) & 0xF; // Round the last digit
+
+        // Assemble in the same bit positions as HexToFloat extraction
+        return (a << 16) | (b << 12) | (c << 8) | (d << 4) | e;
+    }
+
+
 }

@@ -11,9 +11,14 @@ public class MarioLifeSystem : MonoBehaviour
 
     private MarioState _marioState;
     private PlayerInput _playerInput;
+    private EnemyManager _enemyManager;
+    private InteractablesManager _interactablesManager;
+
+    private GameObject _camera;
 
     public int maxLives = 3;
-    public Vector2 respawnPosition = new Vector2(3.4f, 1f);
+    public Transform respawnPosition;
+    public Transform cameraRespawnPosition;
 
     public int livesRemaining;
     private bool isGameOver = false;
@@ -35,14 +40,17 @@ public class MarioLifeSystem : MonoBehaviour
 
     void Start()
     {
-        livesRemaining = maxLives;
+        _livesRemaining = maxLives;
+        _camera = Camera.main?.gameObject;
+        _enemyManager = FindFirstObjectByType<EnemyManager>();
+        _interactablesManager = FindFirstObjectByType<InteractablesManager>();
     }
 
     public void HandleMarioDeath()
     {
-        livesRemaining--;
+        _livesRemaining--;
 
-        if (livesRemaining > 0)
+        if (_livesRemaining > 0)
         {
             SceneManager.LoadScene("Loading Screen");
             StartCoroutine(RespawnMario());
@@ -65,13 +73,17 @@ public class MarioLifeSystem : MonoBehaviour
         _marioState.currentState = MarioStateEnum.Small;
         _marioState.SetIsInvincible(false);
 
-        transform.position = respawnPosition;
+        transform.position = respawnPosition.position;
+        if (_camera )
+            _camera.transform.position = cameraRespawnPosition.position;
+        _enemyManager.ResetEnemies();
+        _interactablesManager.ResetInteractables();
         EnableUserInput();
     }
 
     private void DisableUserInput()
     {
-        if (_playerInput != null)
+        if (_playerInput)
         {
             _playerInput.enabled = false;
         }
@@ -79,7 +91,7 @@ public class MarioLifeSystem : MonoBehaviour
 
     private void EnableUserInput()
     {
-        if (_playerInput != null)
+        if (_playerInput )
         {
             _playerInput.enabled = true;
         }

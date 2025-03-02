@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public abstract class Enemy : MonoBehaviour
 {
     public enum Direction { Left, Right }
     public Direction startingDirection = Direction.Right; // Default starting direction
+
+    private Vector3 _startingPosition;
 
     public float speed = 1f;
     protected Vector2 movementDirection;
@@ -12,7 +16,7 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
 
-    private bool movementEnabled = true;
+    private bool _movementEnabled;
 
     protected virtual void Start()
     {
@@ -24,29 +28,37 @@ public abstract class Enemy : MonoBehaviour
 
         // Set initial movement direction
         movementDirection = (startingDirection == Direction.Left) ? Vector2.left : Vector2.right;
+
+        _startingPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 
     protected virtual void FixedUpdate()
     {
-        if (movementEnabled)
+        if (_movementEnabled)
         {
             Move();
+        }
+        if(isDead && deadTimer <= 0){
+            gameObject.SetActive(false);
+        }
+        else if(isDead){
+            deadTimer -= Time.deltaTime;
         }
     }
 
     protected virtual void Move()
     {
-        rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movementDirection * (speed * Time.fixedDeltaTime));
     }
 
     public void SetMovementEnabled(bool isEnabled)
     {
-        movementEnabled = isEnabled;
-        if (!movementEnabled)
+        _movementEnabled = isEnabled;
+        if (!_movementEnabled)
         {
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
-            rb.isKinematic = true;
+            rb.bodyType = RigidbodyType2D.Kinematic;
         }
     }
 
@@ -62,8 +74,6 @@ public abstract class Enemy : MonoBehaviour
         // If collision is not with player or floor, change direction
         if (!collision.gameObject.CompareTag("Player") && !collision.gameObject.CompareTag("Floor"))
         {
-            Debug.Log("Object hit!");
-
             movementDirection = (movementDirection == Vector2.left) ? Vector2.right : Vector2.left;
         }
 
@@ -73,20 +83,19 @@ public abstract class Enemy : MonoBehaviour
         }
 
         // Collided object is player
-        MarioState marioState = collision.gameObject.GetComponent<MarioState>();
+        var marioState = collision.gameObject.GetComponent<MarioState>();
         if (marioState == null) return;
 
-        ContactPoint2D contact = collision.GetContact(0);
+        var contact = collision.GetContact(0);
         // Stomp
         if (contact.normal.y < -0.5f)
         {
             HandlePlayerStomp(collision);
 
-            Rigidbody2D marioRb = collision.gameObject.GetComponent<Rigidbody2D>();
-            if (marioRb != null)
+            var marioMovement = collision.gameObject.GetComponent<MarioMovement>();
+            if (marioMovement != null)
             {
-                float stompForce = 15f;
-                marioRb.AddForce(Vector2.up * stompForce, ForceMode2D.Impulse);
+                marioMovement.Stomp();
             }
 
             AudioManager.Instance.PlaySFX("stomp");
@@ -108,24 +117,42 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    private bool isDead = false;
+    private float deadTimer = 0;
     protected virtual void HitSequence()
     {
         SetMovementEnabled(false);
-
-        rb.isKinematic = false;
+        rb.bodyType = RigidbodyType2D.Dynamic;
         rb.gravityScale = 1f;
         animator.enabled = false;
         spriteRenderer.flipY = true;
 
-        Collider2D[] colliders = GetComponents<Collider2D>();
+        var colliders = GetComponents<Collider2D>();
         foreach (var col in colliders)
         {
             col.enabled = false;
         }
 
-        rb.linearVelocity = new Vector2(0f, 3f); 
-        Destroy(gameObject, 2f);   
+        rb.linearVelocity = new Vector2(0f, 3f);
+        isDead = true; deadTimer = 3;
+    }
+
+    public void Reset()
+    {
+        gameObject.SetActive(true);
+        isDead = false;
+        transform.position = _startingPosition;
+        SetMovementEnabled(false);
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        spriteRenderer.flipY = false;
+        animator.enabled = true;
+        spriteRenderer.enabled = true;
+        foreach (var col in GetComponents<Collider2D>())
+        {
+            col.enabled = true;
+        }
     }
 
     protected abstract void HandlePlayerStomp(Collision2D collision);
+
 }
