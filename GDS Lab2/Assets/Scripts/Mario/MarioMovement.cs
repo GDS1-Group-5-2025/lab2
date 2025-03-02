@@ -60,6 +60,8 @@ public class MarioMovement : MonoBehaviour
     public float initialXSpeedWhenJumping;
     public float lastGravity = HexToFloat(0x00280); // default gravity
     public float lastDampenedGravity = HexToFloat(0x00280); // default dampened gravity
+    public bool isGrounded = true;
+    public float newXSpeedInSmwUnits;
 
     private Rigidbody2D _rb;
     private const float SmwFramerate = 60f; // SMW runs at 60 FPS
@@ -102,10 +104,8 @@ public class MarioMovement : MonoBehaviour
         var currentXSpeedInSmwUnits = velocity.x / SmwFramerate;
         var currentYSpeedInSmwUnits = velocity.y / SmwFramerate;
 
-        float newXSpeedInSmwUnits;
 
-        // We're on the ground if the vertical speed is close to 0
-        if (Mathf.Abs(currentYSpeedInSmwUnits) < 0.1f)
+        if (isGrounded)
         {
             // Calculate new speed in SMW units per frame
             newXSpeedInSmwUnits = CalculateNewXGroundSpeed(currentXSpeedInSmwUnits);
@@ -209,14 +209,14 @@ public class MarioMovement : MonoBehaviour
         var maxAirSpeed = initialXSpeedWhenJumping < HexToFloat(0x01900) ? maxAirSpeedSmall : maxAirSpeedLarge;
 
         // Input is against current direction - decelerate
-        if (Math.Sign(xAxisInput) != Math.Sign(currentSpeed))
+        if (currentSpeed > 0 && Math.Sign(xAxisInput) != Math.Sign(currentSpeed))
         {
             return currentSpeed > 0
                 ? Mathf.Max(currentSpeed - deceleration, 0)
                 : Mathf.Min(currentSpeed + deceleration, 0);
         }
 
-        // Input is in the same direction - accelerate (if below max speed)
+        // Input is in the same direction - accelerate
         currentSpeed += xAxisInput * acceleration;
 
         // Clamp to max speed
@@ -284,7 +284,7 @@ public class MarioMovement : MonoBehaviour
         isJumping = context.ReadValue<float>() > 0;
 
         // only jump if not currently pressing the jump button and if not falling
-        if (isJumping && !wasJumping && Mathf.Abs(_rb.linearVelocity.y) < 0.05f)
+        if (isJumping && !wasJumping && isGrounded)
         {
             Jump();
         }
@@ -299,7 +299,7 @@ public class MarioMovement : MonoBehaviour
         var combinedHex = (0x0F000 & 0x04000) | (0x00FFF & velocityHex);
 
         // Convert back to float
-        var resultSpeed = HexToFloat(combinedHex);
+        var resultSpeed = HexToFloat(combinedHex) * SmwFramerate;
 
         _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, resultSpeed);
     }
@@ -351,4 +351,6 @@ public class MarioMovement : MonoBehaviour
         // Assemble in the same bit positions as HexToFloat extraction
         return (a << 16) | (b << 12) | (c << 8) | (d << 4) | e;
     }
+
+
 }

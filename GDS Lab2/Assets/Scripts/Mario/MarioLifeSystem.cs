@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(MarioState))]
 public class MarioLifeSystem : MonoBehaviour
@@ -11,8 +10,11 @@ public class MarioLifeSystem : MonoBehaviour
     private MarioState _marioState;
     private PlayerInput _playerInput;
 
+    private GameObject _camera;
+
     public int maxLives = 3;
     public Transform respawnPosition;
+    public Transform cameraRespawnPosition;
 
     private int _livesRemaining;
 
@@ -34,6 +36,7 @@ public class MarioLifeSystem : MonoBehaviour
     void Start()
     {
         _livesRemaining = maxLives;
+        _camera = Camera.main?.gameObject;
     }
 
     public void HandleMarioDeath()
@@ -60,6 +63,8 @@ public class MarioLifeSystem : MonoBehaviour
         _marioState.SetIsInvincible(false);
 
         transform.position = respawnPosition.position;
+        if (_camera )
+            _camera.transform.position = cameraRespawnPosition.position;
         EnableUserInput();
     }
 

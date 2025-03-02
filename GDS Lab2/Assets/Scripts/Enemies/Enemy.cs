@@ -40,7 +40,7 @@ public abstract class Enemy : MonoBehaviour
         rb.MovePosition(rb.position + movementDirection * (speed * Time.fixedDeltaTime));
     }
 
-    protected void SetMovementEnabled(bool isEnabled)
+    public void SetMovementEnabled(bool isEnabled)
     {
         _movementEnabled = isEnabled;
         if (!_movementEnabled)
