@@ -24,6 +24,17 @@ public class GameOverManager : MonoBehaviour
         MusicManager.Instance.PlayNonLoopingClipThenRevert("game over");
         Debug.Log("GAME OVER!");
 
+        // Find the Timer component in the TimeManager GameObject and stop the timer
+        GameObject timeManager = GameObject.Find("TimeManager");
+        if (timeManager != null)
+        {
+            Timer timer = timeManager.GetComponent<Timer>();
+            if (timer != null)
+            {
+                timer.StopTimer();
+            }
+        }
+
         // Invoke the OnGameOver event
         if (OnGameOver != null)
         {
