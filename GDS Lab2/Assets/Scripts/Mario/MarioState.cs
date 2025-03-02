@@ -15,6 +15,13 @@ public class MarioState : MonoBehaviour
     [SerializeField] private float invincibleDuration;
     private bool wasInvincible;
 
+    private Animator _animator;
+
+    void Start()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
         if (isInvincible && !wasInvincible)
@@ -33,6 +40,15 @@ public class MarioState : MonoBehaviour
         }
 
         wasInvincible = isInvincible;
+
+        if (_animator != null && currentState == MarioStateEnum.Dead)
+        {
+            _animator.SetBool("IsDead", true);
+        } 
+        else 
+        {
+            _animator.SetBool("IsDead", false);
+        }
     }
 
     public MarioStateEnum TakeDamage()

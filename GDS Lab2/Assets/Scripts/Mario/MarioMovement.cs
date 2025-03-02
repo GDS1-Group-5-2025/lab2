@@ -66,10 +66,15 @@ public class MarioMovement : MonoBehaviour
     private float _accumulator; // Track leftover time
     private const float FixedTimeStep = 1f / 60f; // 60Hz physics update
 
+    //Animation
+    private Animator _animator;
+    private bool _facingRight = true;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -84,6 +89,11 @@ public class MarioMovement : MonoBehaviour
             UpdatePhysics();
             _accumulator -= FixedTimeStep;
         }
+
+        // Update animation
+        _animator.SetFloat("Speed", Mathf.Abs(_rb.linearVelocity.x));
+        UpdateJumpingAnim();
+        UpdateTurningAnim();
     }
 
     // Physics update at fixed timestep
@@ -350,5 +360,40 @@ public class MarioMovement : MonoBehaviour
 
         // Assemble in the same bit positions as HexToFloat extraction
         return (a << 16) | (b << 12) | (c << 8) | (d << 4) | e;
+    }
+
+    private void UpdateJumpingAnim()
+    {
+        bool isGrounded = Mathf.Abs(_rb.linearVelocity.y) < 0.1f;
+        _animator.SetBool("IsGrounded", isGrounded);
+
+        if (!isGrounded)
+        {
+            _animator.SetBool("HasJumped", true);
+        }
+        else
+        {
+            _animator.SetBool("HasJumped", false);
+        }
+    }
+
+    private void UpdateTurningAnim()
+    {
+        if (xAxisInput > 0 && !_facingRight)
+        {
+            Flip();
+        }
+        else if (xAxisInput < 0 && _facingRight)
+        {
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        _facingRight = !_facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
     }
 }
