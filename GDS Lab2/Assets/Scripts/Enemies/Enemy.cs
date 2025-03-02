@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
@@ -13,7 +12,7 @@ public abstract class Enemy : MonoBehaviour
     protected Animator animator;
     protected SpriteRenderer spriteRenderer;
 
-    private bool _movementEnabled;
+    private bool movementEnabled = true;
 
     protected virtual void Start()
     {
@@ -29,7 +28,7 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (_movementEnabled)
+        if (movementEnabled)
         {
             Move();
         }
@@ -37,17 +36,17 @@ public abstract class Enemy : MonoBehaviour
 
     protected virtual void Move()
     {
-        rb.MovePosition(rb.position + movementDirection * (speed * Time.fixedDeltaTime));
+        rb.MovePosition(rb.position + movementDirection * speed * Time.fixedDeltaTime);
     }
 
-    protected void SetMovementEnabled(bool isEnabled)
+    public void SetMovementEnabled(bool isEnabled)
     {
-        _movementEnabled = isEnabled;
-        if (!_movementEnabled)
+        movementEnabled = isEnabled;
+        if (!movementEnabled)
         {
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
-            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.isKinematic = true;
         }
     }
 
@@ -74,19 +73,20 @@ public abstract class Enemy : MonoBehaviour
         }
 
         // Collided object is player
-        var marioState = collision.gameObject.GetComponent<MarioState>();
+        MarioState marioState = collision.gameObject.GetComponent<MarioState>();
         if (marioState == null) return;
 
-        var contact = collision.GetContact(0);
+        ContactPoint2D contact = collision.GetContact(0);
         // Stomp
         if (contact.normal.y < -0.5f)
         {
             HandlePlayerStomp(collision);
 
-            var marioMovement = collision.gameObject.GetComponent<MarioMovement>();
-            if (marioMovement != null)
+            Rigidbody2D marioRb = collision.gameObject.GetComponent<Rigidbody2D>();
+            if (marioRb != null)
             {
-                marioMovement.Stomp();
+                float stompForce = 15f;
+                marioRb.AddForce(Vector2.up * stompForce, ForceMode2D.Impulse);
             }
 
             AudioManager.Instance.PlaySFX("stomp");
@@ -112,21 +112,20 @@ public abstract class Enemy : MonoBehaviour
     {
         SetMovementEnabled(false);
 
-        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.isKinematic = false;
         rb.gravityScale = 1f;
         animator.enabled = false;
         spriteRenderer.flipY = true;
 
-        var colliders = GetComponents<Collider2D>();
+        Collider2D[] colliders = GetComponents<Collider2D>();
         foreach (var col in colliders)
         {
             col.enabled = false;
         }
 
-        rb.linearVelocity = new Vector2(0f, 3f);
-        Destroy(gameObject, 2f);
+        rb.linearVelocity = new Vector2(0f, 3f); 
+        Destroy(gameObject, 2f);   
     }
 
     protected abstract void HandlePlayerStomp(Collision2D collision);
-
 }
