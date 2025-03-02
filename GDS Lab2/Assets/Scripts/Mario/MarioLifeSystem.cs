@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using System;
 
 [RequireComponent(typeof(MarioState))]
 public class MarioLifeSystem : MonoBehaviour
@@ -14,11 +16,10 @@ public class MarioLifeSystem : MonoBehaviour
 
     private GameObject _camera;
 
-    public int maxLives = 3;
     public Transform respawnPosition;
     public Transform cameraRespawnPosition;
 
-    private int _livesRemaining;
+    private bool _isGameOver;
 
     private void Awake()
     {
@@ -37,7 +38,6 @@ public class MarioLifeSystem : MonoBehaviour
 
     void Start()
     {
-        _livesRemaining = maxLives;
         _camera = Camera.main?.gameObject;
         _enemyManager = FindFirstObjectByType<EnemyManager>();
         _interactablesManager = FindFirstObjectByType<InteractablesManager>();
@@ -45,23 +45,28 @@ public class MarioLifeSystem : MonoBehaviour
 
     public void HandleMarioDeath()
     {
-        _livesRemaining--;
+        GameOverManager.Instance.livesRemaining--;
 
-        if (_livesRemaining > 0)
+        if (GameOverManager.Instance.livesRemaining > 0)
         {
+            
+            SceneManager.LoadScene("Loading Screen");
             StartCoroutine(RespawnMario());
         }
         else
         {
-            GameOver();
+            _isGameOver = true;
+            GameOverManager.Instance.GameOver();
         }
     }
 
     private IEnumerator RespawnMario()
     {
+        if (_isGameOver) yield break;
+
         MusicManager.Instance.PlayNonLoopingClipThenRevert("death");
         DisableUserInput();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
 
         _marioState.currentState = MarioStateEnum.Small;
         _marioState.SetIsInvincible(false);
@@ -88,12 +93,5 @@ public class MarioLifeSystem : MonoBehaviour
         {
             _playerInput.enabled = true;
         }
-    }
-
-    private void GameOver()
-    {
-        MusicManager.Instance.PlayNonLoopingClipThenRevert("game over");
-        Debug.Log("GAME OVER!");
-        //trigger game over UI
     }
 }

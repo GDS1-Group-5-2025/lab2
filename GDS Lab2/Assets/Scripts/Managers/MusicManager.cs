@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 [System.Serializable]
 public class NamedMusicClip
@@ -170,4 +171,5 @@ public class MusicManager : MonoBehaviour
         musicSource.Stop();
         ResumeLastLoopingTrack();
     }
+
 }
