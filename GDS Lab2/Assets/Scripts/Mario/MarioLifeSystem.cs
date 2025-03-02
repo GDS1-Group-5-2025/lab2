@@ -9,6 +9,7 @@ public class MarioLifeSystem : MonoBehaviour
 
     private MarioState _marioState;
     private PlayerInput _playerInput;
+    private EnemyManager _enemyManager;
 
     private GameObject _camera;
 
@@ -37,6 +38,7 @@ public class MarioLifeSystem : MonoBehaviour
     {
         _livesRemaining = maxLives;
         _camera = Camera.main?.gameObject;
+        _enemyManager = FindFirstObjectByType<EnemyManager>();
     }
 
     public void HandleMarioDeath()
@@ -65,6 +67,7 @@ public class MarioLifeSystem : MonoBehaviour
         transform.position = respawnPosition.position;
         if (_camera )
             _camera.transform.position = cameraRespawnPosition.position;
+        _enemyManager.ResetEnemies();
         EnableUserInput();
     }
 
