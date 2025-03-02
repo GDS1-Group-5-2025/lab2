@@ -3,6 +3,7 @@ using UnityEngine;
 public class MarioGrounder : MonoBehaviour
 {
     private MarioMovement _marioMovement;
+    private int _groundedCount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -12,15 +13,14 @@ public class MarioGrounder : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Floor"))
-        {
             _marioMovement.isGrounded = true;
-        }
+            _groundedCount++;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Floor"))
+        _groundedCount--;
+        if (_groundedCount == 0)
         {
             _marioMovement.isGrounded = false;
         }
