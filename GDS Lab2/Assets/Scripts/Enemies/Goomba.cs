@@ -4,6 +4,13 @@ using System.Collections;
 public class Goomba : Enemy
 {
     public Sprite stompSprite;
+    private Sprite _startingSprite;
+
+    private new void Start()
+    {
+        base.Start();
+        _startingSprite = GetComponent<SpriteRenderer>().sprite;
+    }
 
     private void Die()
     {
@@ -15,7 +22,7 @@ public class Goomba : Enemy
         animator.enabled = false;
         GetComponent<SpriteRenderer>().sprite = stompSprite;
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     protected override void HandlePlayerStomp(Collision2D collision)
@@ -29,5 +36,17 @@ public class Goomba : Enemy
         }
 
         Die();
+    }
+
+    protected new void Reset()
+    {
+        base.Reset();
+        SetMovementEnabled(true);
+        GetComponent<SpriteRenderer>().sprite = _startingSprite;
+        animator.enabled = true;
+        foreach (var col in GetComponents<Collider2D>())
+        {
+            col.enabled = true;
+        }
     }
 }

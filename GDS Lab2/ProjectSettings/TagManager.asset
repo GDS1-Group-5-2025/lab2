@@ -16,11 +16,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CameraWall
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Floor
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 140659915
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -54,6 +57,15 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3472485351
+    locked: 0
+  - name: MovingPipe
+    uniqueID: 980954137
+    locked: 0
+  - name: Tiles
+    uniqueID: 2233253395
+    locked: 0
+  - name: Ground
+    uniqueID: 1366143831
     locked: 0
   m_RenderingLayers:
   - Default

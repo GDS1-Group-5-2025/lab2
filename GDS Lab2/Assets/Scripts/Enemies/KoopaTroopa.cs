@@ -4,37 +4,39 @@ using System.Collections;
 public class KoopaTroopa : Enemy
 {
     private enum KoopaState { Walking, Shell, ShellMoving }
-    private KoopaState currentState = KoopaState.Walking;
+    private KoopaState _currentState = KoopaState.Walking;
+    private Sprite _startingSprite;
 
     [SerializeField] private Sprite shellSprite;
 
-    private CircleCollider2D circleCollider;
-    private BoxCollider2D boxCollider;
+    private CircleCollider2D _circleCollider;
+    private BoxCollider2D _boxCollider;
 
-    private float originalSpeed;
+    private float _originalSpeed;
 
     private void InitializeKoopa()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
-        circleCollider = GetComponent<CircleCollider2D>();
+        _boxCollider = GetComponent<BoxCollider2D>();
+        _circleCollider = GetComponent<CircleCollider2D>();
 
-        originalSpeed = speed;
+        _originalSpeed = speed;
 
-        if (circleCollider != null)
+        if (_circleCollider)
         {
-            circleCollider.enabled = false;
+            _circleCollider.enabled = false;
         }
     }
 
     protected override void Start()
     {
         base.Start();
+        _startingSprite = spriteRenderer.sprite;
         InitializeKoopa();
     }
 
     protected override void HandlePlayerStomp(Collision2D collision)
     {
-        if (currentState == KoopaState.Walking)
+        if (_currentState == KoopaState.Walking)
         {
             ShellMode();
         }
@@ -50,7 +52,7 @@ public class KoopaTroopa : Enemy
     {
         base.Move();
 
-        if (spriteRenderer != null)
+        if (spriteRenderer)
         {
             spriteRenderer.flipX = movementDirection.x > 0;
         }
@@ -58,7 +60,7 @@ public class KoopaTroopa : Enemy
 
     private void ShellMode()
     {
-        currentState = KoopaState.Shell;
+        _currentState = KoopaState.Shell;
 
         if (shellSprite != null)
         {
@@ -70,8 +72,8 @@ public class KoopaTroopa : Enemy
             animator.enabled = false;
         }
 
-        if (boxCollider != null) boxCollider.enabled = false;
-        if (circleCollider != null) circleCollider.enabled = true;
+        if (_boxCollider != null) _boxCollider.enabled = false;
+        if (_circleCollider != null) _circleCollider.enabled = true;
 
         SetMovementEnabled(false);
 
@@ -87,7 +89,7 @@ public class KoopaTroopa : Enemy
     private IEnumerator ShellTimer()
     {
         yield return new WaitForSeconds(13);
-        if (currentState == KoopaState.Shell)
+        if (_currentState == KoopaState.Shell)
         {
             ExitShellMode();
         }
@@ -95,17 +97,17 @@ public class KoopaTroopa : Enemy
 
     private void ExitShellMode()
     {
-        currentState = KoopaState.Walking;
+        _currentState = KoopaState.Walking;
 
-        if (animator != null)
+        if (animator )
         {
             animator.enabled = true;
         }
 
-        if (boxCollider != null) boxCollider.enabled = true;
-        if (circleCollider != null) circleCollider.enabled = false;
+        if (_boxCollider ) _boxCollider.enabled = true;
+        if (_circleCollider) _circleCollider.enabled = false;
 
-        speed = originalSpeed;
+        speed = _originalSpeed;
 
         SetMovementEnabled(true);
 
@@ -116,17 +118,17 @@ public class KoopaTroopa : Enemy
     //This function should be called by Mario when he is next to a shell and presses jump button to kick it
     public void KickShell(Collision2D collision)
     {
-        currentState = KoopaState.ShellMoving;
-        speed = originalSpeed * 4;
+        _currentState = KoopaState.ShellMoving;
+        speed = _originalSpeed * 4;
 
         //float playerDirection = Mathf.Sign(collision.transform.position.x - transform.position.x);
         //movementDirection = new Vector2(playerDirection, 0);
 
         //Above code for testing
 
-        if (rb != null)
+        if (rb)
         {
-            rb.isKinematic = false;
+            rb.bodyType = RigidbodyType2D.Dynamic;
         }
         SetMovementEnabled(true);
 
@@ -139,5 +141,15 @@ public class KoopaTroopa : Enemy
     {
         base.HitSequence();
         spriteRenderer.sprite = shellSprite;
+    }
+
+    protected new void Reset()
+    {
+        base.Reset();
+        _currentState = KoopaState.Walking;
+        spriteRenderer.sprite = _startingSprite;
+        speed = _originalSpeed;
+        if (_circleCollider) _circleCollider.enabled = false;
+        if (_boxCollider) _boxCollider.enabled = true;
     }
 }
