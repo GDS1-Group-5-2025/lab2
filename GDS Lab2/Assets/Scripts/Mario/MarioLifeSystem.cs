@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(MarioState))]
 public class MarioLifeSystem : MonoBehaviour
@@ -13,10 +14,9 @@ public class MarioLifeSystem : MonoBehaviour
     private PlayerInput _playerInput;
 
     public int maxLives = 3;
-    public Vector2 respawnPosition = new Vector2(3.4f, 1f);
+    public Transform respawnPosition;
 
-    public int livesRemaining;
-    private bool isGameOver = false;
+    private int _livesRemaining;
 
     private void Awake()
     {
@@ -35,14 +35,14 @@ public class MarioLifeSystem : MonoBehaviour
 
     void Start()
     {
-        livesRemaining = maxLives;
+        _livesRemaining = maxLives;
     }
 
     public void HandleMarioDeath()
     {
-        livesRemaining--;
+        _livesRemaining--;
 
-        if (livesRemaining > 0)
+        if (_livesRemaining > 0)
         {
             SceneManager.LoadScene("Loading Screen");
             StartCoroutine(RespawnMario());
@@ -65,13 +65,13 @@ public class MarioLifeSystem : MonoBehaviour
         _marioState.currentState = MarioStateEnum.Small;
         _marioState.SetIsInvincible(false);
 
-        transform.position = respawnPosition;
+        transform.position = respawnPosition.position;
         EnableUserInput();
     }
 
     private void DisableUserInput()
     {
-        if (_playerInput != null)
+        if (_playerInput)
         {
             _playerInput.enabled = false;
         }
@@ -79,7 +79,7 @@ public class MarioLifeSystem : MonoBehaviour
 
     private void EnableUserInput()
     {
-        if (_playerInput != null)
+        if (_playerInput )
         {
             _playerInput.enabled = true;
         }

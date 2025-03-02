@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7566467545539951815}
   - component: {fileID: 1120501848853247353}
   - component: {fileID: 5585113217990646674}
+  - component: {fileID: 346993121757927211}
   - component: {fileID: 422752716877360548}
   - component: {fileID: 8242954744409225535}
   - component: {fileID: 3047904864743014131}
@@ -125,11 +126,57 @@ CapsuleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_CompositeOperation: 0
+  m_CompositeOperation: 1
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.0069764256}
-  m_Size: {x: 1, y: 1.0188814}
+  m_Offset: {x: 0, y: 0.09}
+  m_Size: {x: 0.77, y: 0.86}
   m_Direction: 0
+--- !u!61 &346993121757927211
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941571817895590636}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 1
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.24946356}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.77, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!50 &422752716877360548
 Rigidbody2D:
   serializedVersion: 5
@@ -315,8 +362,8 @@ MonoBehaviour:
   momentumAccelerationLarge: 0.003479004
   maxAirSpeedSmall: 0.09765625
   maxAirSpeedLarge: 0.16015625
-  jumpSpeedSmall: 0.25
-  jumpSpeedMedium: 0.25
+  jumpSpeedSmall: 0.265625
+  jumpSpeedMedium: 0.265625
   jumpSpeedLarge: 0.3125
   normalGravitySmall: 0.02734375
   normalGravityMedium: 0.0234375
@@ -324,6 +371,7 @@ MonoBehaviour:
   dampenedGravitySmall: 0.0078125
   dampenedGravityMedium: 0.0073242188
   dampenedGravityLarge: 0.009765625
+  stompSpeed: 0.265625
   xAxisInput: 0
   isRunning: 0
   isJumping: 0

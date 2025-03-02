@@ -102,7 +102,7 @@ public class MarioMovement : MonoBehaviour
         float newXSpeedInSmwUnits;
 
         // We're on the ground if the vertical speed is close to 0
-        if (Mathf.Abs(currentYSpeedInSmwUnits) < 0.05f)
+        if (Mathf.Abs(currentYSpeedInSmwUnits) < 0.1f)
         {
             // Calculate new speed in SMW units per frame
             newXSpeedInSmwUnits = CalculateNewXGroundSpeed(currentXSpeedInSmwUnits);
