@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      8-bit_SMB1_Fire_Flower_0: 8156900405182283579
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
