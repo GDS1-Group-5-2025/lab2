@@ -16,7 +16,9 @@ public class MarioLifeSystem : MonoBehaviour
     public int maxLives = 3;
     public Transform respawnPosition;
 
-    private int _livesRemaining;
+    public int _livesRemaining;
+    private bool isGameOver;
+
 
     private void Awake()
     {

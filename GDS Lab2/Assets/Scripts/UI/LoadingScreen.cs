@@ -15,7 +15,7 @@ public class LoadingScreen : MonoBehaviour
         // Display lives if MarioLifeSystem exists
         if (MarioLifeSystem.Instance != null)
         {
-            livesText.text = MarioLifeSystem.Instance.livesRemaining.ToString();
+            livesText.text = MarioLifeSystem.Instance._livesRemaining.ToString();
         }
         else
         {
