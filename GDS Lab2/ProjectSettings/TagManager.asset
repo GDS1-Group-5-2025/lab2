@@ -52,20 +52,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Tiles
-    uniqueID: 2233253395
+  - name: Ground
+    uniqueID: 1366143831
     locked: 0
   - name: Player
     uniqueID: 3472485351
     locked: 0
-  - name: Ground
-    uniqueID: 1366143831
+  - name: Enemies
+    uniqueID: 3151614343
     locked: 0
   - name: MovingPipe
     uniqueID: 980954137
     locked: 0
-  - name: Enemies
-    uniqueID: 3151614343
+  - name: Tiles
+    uniqueID: 2233253395
     locked: 0
   m_RenderingLayers:
   - Default
