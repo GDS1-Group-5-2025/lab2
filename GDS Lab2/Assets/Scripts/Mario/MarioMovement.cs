@@ -205,8 +205,8 @@ public class MarioMovement : MonoBehaviour
         };
 
         // Calculate acceleration and max speed
-        var acceleration = currentSpeed < 0x01900 ? momentumAccelerationSmall : momentumAccelerationLarge;
-        var maxAirSpeed = initialXSpeedWhenJumping < HexToFloat(0x01900) ? maxAirSpeedSmall : maxAirSpeedLarge;
+        var acceleration = currentSpeed <= 0x01900 ? momentumAccelerationSmall : momentumAccelerationLarge;
+        var maxAirSpeed = initialXSpeedWhenJumping <= HexToFloat(0x01900) ? maxAirSpeedSmall : maxAirSpeedLarge;
 
         // Input is against current direction - decelerate
         if (currentSpeed > 0 && Math.Sign(xAxisInput) != Math.Sign(currentSpeed))
