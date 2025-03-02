@@ -21,7 +21,7 @@ public class MarioLifeSystem : MonoBehaviour
     public Transform cameraRespawnPosition;
 
     public int livesRemaining;
-    private bool isGameOver = false;
+    private bool _isGameOver;
 
     private void Awake()
     {
@@ -40,7 +40,7 @@ public class MarioLifeSystem : MonoBehaviour
 
     void Start()
     {
-        _livesRemaining = maxLives;
+        livesRemaining = maxLives;
         _camera = Camera.main?.gameObject;
         _enemyManager = FindFirstObjectByType<EnemyManager>();
         _interactablesManager = FindFirstObjectByType<InteractablesManager>();
@@ -48,23 +48,23 @@ public class MarioLifeSystem : MonoBehaviour
 
     public void HandleMarioDeath()
     {
-        _livesRemaining--;
+        livesRemaining--;
 
-        if (_livesRemaining > 0)
+        if (livesRemaining > 0)
         {
             SceneManager.LoadScene("Loading Screen");
             StartCoroutine(RespawnMario());
         }
         else
         {
-            isGameOver = true;
+            _isGameOver = true;
             GameOverManager.Instance.GameOver();
         }
     }
 
     private IEnumerator RespawnMario()
     {
-        if (isGameOver) yield break;
+        if (_isGameOver) yield break;
 
         MusicManager.Instance.PlayNonLoopingClipThenRevert("death");
         DisableUserInput();
