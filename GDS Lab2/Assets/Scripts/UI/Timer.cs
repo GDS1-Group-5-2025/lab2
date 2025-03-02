@@ -8,6 +8,7 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timeText;
 
     private float targetTime;
+    private bool isTimerRunning = true;
 
     void Start()
     {
@@ -17,6 +18,9 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
+        if (!isTimerRunning)
+            return;
+
         targetTime -= Time.deltaTime;
 
         UpdateTimeText();
@@ -37,7 +41,13 @@ public class Timer : MonoBehaviour
 
     void timerEnded()
     {
+        isTimerRunning = false;
         GameOverManager.Instance.GameOver();
         Debug.Log("Timer ended!");
+    }
+
+    public void StopTimer()
+    {
+        isTimerRunning = false;
     }
 }
